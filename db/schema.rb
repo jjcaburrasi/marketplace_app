@@ -16,12 +16,14 @@ ActiveRecord::Schema.define(version: 2022_09_27_095429) do
   enable_extension "plpgsql"
 
   create_table "candidacies", force: :cascade do |t|
-    t.integer "worker_id"
-    t.integer "job_request_id"
+    t.bigint "worker_id", null: false
+    t.bigint "job_request_id", null: false
     t.string "status"
     t.date "start_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_request_id"], name: "index_candidacies_on_job_request_id"
+    t.index ["worker_id"], name: "index_candidacies_on_worker_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -53,7 +55,7 @@ ActiveRecord::Schema.define(version: 2022_09_27_095429) do
   end
 
   create_table "job_requests", force: :cascade do |t|
-    t.integer "client_id"
+    t.bigint "client_id", null: false
     t.date "start_date"
     t.date "end_date"
     t.string "job_function"
@@ -62,17 +64,21 @@ ActiveRecord::Schema.define(version: 2022_09_27_095429) do
     t.float "monthly_salary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_job_requests_on_client_id"
   end
 
   create_table "placements", force: :cascade do |t|
-    t.integer "candidacy_id"
-    t.integer "worker_id"
-    t.integer "client_id"
+    t.bigint "client_id", null: false
+    t.bigint "worker_id", null: false
+    t.bigint "candidacy_id", null: false
     t.date "start_date"
     t.date "end_date"
     t.float "monthly_salary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidacy_id"], name: "index_placements_on_candidacy_id"
+    t.index ["client_id"], name: "index_placements_on_client_id"
+    t.index ["worker_id"], name: "index_placements_on_worker_id"
   end
 
   create_table "workers", force: :cascade do |t|
@@ -104,4 +110,10 @@ ActiveRecord::Schema.define(version: 2022_09_27_095429) do
     t.index ["unlock_token"], name: "index_workers_on_unlock_token", unique: true
   end
 
+  add_foreign_key "candidacies", "job_requests"
+  add_foreign_key "candidacies", "workers"
+  add_foreign_key "job_requests", "clients"
+  add_foreign_key "placements", "candidacies"
+  add_foreign_key "placements", "clients"
+  add_foreign_key "placements", "workers"
 end
