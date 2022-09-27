@@ -1,9 +1,8 @@
 class Worker < ApplicationRecord
 
-has_many :candidacies,  class_name: "Candidacies",
-                        foreign_key: "worker_id",
-                        dependent: :destroy
-has_many :job_requests, through: :candidacies, source: :job_request
+has_many :candidacies, dependent: :destroy
+has_many :job_requests, through: :candidacies
+has_many :placements, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
