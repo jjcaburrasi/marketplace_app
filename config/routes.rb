@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :admins
   devise_for :clients
   devise_for :workers
-  resources :users
-  resources :clients
-  resources :admins
+  resources :job_requests
+  resources :workers, only: :show
 end
