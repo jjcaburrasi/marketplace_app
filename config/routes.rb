@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  root "static_pages#home"
   devise_for :admins
   devise_for :clients
   devise_for :workers
-  root "application#hello"
+  resources :users
+  resources :clients
+  resources :admins
 end

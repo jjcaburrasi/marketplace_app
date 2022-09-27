@@ -2,10 +2,7 @@ class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, if: :devise_controller?
 
-    def hello
-        render html: "Marketplace APP"
-    end
-
+   
     protected
 
         def configure_permitted_parameters
@@ -14,8 +11,12 @@ class ApplicationController < ActionController::Base
         end
 
         # def after_sign_in_path_for(resource)
-        #    @user
+        #    @admin
         # end   
+
+        # def after_sign_up_path_for(resource)
+        #     @admin
+        #  end  
 
         # def logged_in_user
         #     unless user_signed_in?
