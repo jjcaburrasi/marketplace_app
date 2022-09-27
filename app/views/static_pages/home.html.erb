@@ -1,13 +1,14 @@
 
 <div class="center jumbotron">
-  <h1>MKPlace</h1>
-
-    <nav>
-        <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Sign up as Worker",    new_worker_registration_path, class: "btn btn-lg btn-primary"%></li>
-        <li><%= link_to "Sign up as Client",    new_client_registration_path, class: "btn btn-lg btn-primary" %></li>
-        <li><%= link_to "Sign up as Admin",     new_admin_registration_path,  class: "btn btn-lg btn-primary" %></li>
+  <h1 class='title'>MKPlace</h1>
+  <% if !someone_signed_in?%>
+        <ul>
+        <li><%= link_to "Sign in as a worker",    new_worker_session_path, class: "btn btn-lg btn-primary"%></li>
+        <li><%= link_to "Sign in as a client",    new_client_session_path, class: "btn btn-lg btn-primary" %></li>
+        <li><%= link_to "Sign in as an admin",     new_admin_session_path,  class: "btn btn-lg btn-primary" %></li>
         </ul>
-    </nav>
+  <%else%>
+    <%= link_to 'Get Started', job_requests_path %>
+  <%end%>
 </div>
 

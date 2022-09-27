@@ -1,10 +1,34 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "sample app", root_path, id: "logo" %>
+    <%= link_to 'MARKETPLACE', root_path, id: "logo"%>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '#' %></li>
-        <li><%= link_to "Log in", '#' %></li>
+      <ul class="nav navbar-nav navbar-right"> 
+        <li><%= link_to "Home", root_path %></li> 
+        <% if someone_signed_in? %>
+          <li class='job'><%= link_to "Jobs", job_requests_path %></li> 
+          
+          <li class="dropdown">
+            <a href class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="divider"></li>
+              <% if current_worker %>
+                <li><%= link_to "Profile", current_worker %> </li>
+                <li><%= link_to "Log out", destroy_worker_session_path, method: :delete %> </li>
+                <li><%= link_to "Edit profile", edit_worker_registration_path %> </li>
+              <%end%>
+              <% if current_admin %>
+                <li><%= link_to "Profile", current_admin %> </li>
+                <li><%= link_to "Log out", destroy_admin_session_path, method: :delete %> </li>
+                <li><%= link_to "Edit profile", edit_admin_registration_path %> </li>
+              <%end%>
+              <% if current_client %>
+                <li><%= link_to "Profile", current_client %> </li>
+                <li><%= link_to "Log out", destroy_client_session_path, method: :delete %> </li>
+                <li><%= link_to "Edit profile", edit_client_registration_path %> </li>
+              <%end%>
+            </ul> 
+            <%end%>
+          </li>
       </ul>
     </nav>
   </div>
