@@ -93,6 +93,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.11.0)
     execjs (2.8.1)
+    faker (2.11.0)
+      i18n (>= 1.6, < 2)
     ffi (1.15.5)
     foreman (0.87.2)
     globalid (1.0.0)
@@ -232,6 +234,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  faker
   foreman
   jbuilder (~> 2.7)
   listen (~> 3.3)
