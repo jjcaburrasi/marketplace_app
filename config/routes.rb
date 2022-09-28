@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :job_requests, path:"jobs"
   resources :workers
   resources :clients
+  resources :admins
 end

@@ -1,18 +1,10 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to 'MARKETPLACE', root_path, id: "logo"%>
-    <nav>
-      <ul class="nav navbar-nav navbar-right"> 
-      <li><%= link_to "Home", root_path %></li> 
-
-        <% if worker_signed_in? %>
-            <%= render 'header_partials/worker_header' %>
-        <% elsif client_signed_in? %>
-            <%= render 'header_partials/client_header' %>
-        <% elsif admin_signed_in? %>
-            <%= render 'header_partials/admin_header' %>
-        <%end%>
-      </ul>
-    </nav>
-  </div>
-</header>
+<% if worker_signed_in? %>
+    <%= render 'header_partials/worker_header' %>
+<% elsif client_signed_in? %>
+    <%= render 'header_partials/client_header' %>
+<% elsif admin_signed_in? %>
+    <%= render 'header_partials/admin_header' %>
+<% else %>
+    <%= render 'header_partials/visitor_header' %>
+<%end%>
+  
