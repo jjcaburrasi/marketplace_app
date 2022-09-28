@@ -1,7 +1,7 @@
 class WorkersController < ApplicationController
-    def show
-        @worker = current_worker
-    end
+    # def show
+    #     @worker = current_worker
+    # end
 
     private
     def worker_params
