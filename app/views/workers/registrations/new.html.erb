@@ -10,7 +10,8 @@
 
   <div class="field">
     <%= f.label :skills %><br />
-    <% array_skills = ['Driving', 'Tech', 'Construction', "Own vehicle", "Work rotatory turn"]%>
+    <% array_skills = ['Driving', 'Tech', 'Construction', "Own vehicle", "Work rotatory turn", "English",
+    "Spanish", "Capacity to load heavy weights", "Disability certificate"]%>
     <% array_skills.each do |skill|%>
     <%= f.check_box :skills, {multiple: true}, skill, nil %>
     <%= f.label skill%>

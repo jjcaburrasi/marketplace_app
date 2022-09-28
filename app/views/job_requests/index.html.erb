@@ -1,13 +1,13 @@
 <% if worker_signed_in? %>
-    <%= link_to 'hello', '#' %>
+    LISTA DE TRABAJOS DISPONIBLES
 <%end%>
 <% if admin_signed_in? %>
-    <%= puts 'admin' %>
+   LISTA DE TRABAJOS PARA ADMINISTRAR
 <%end%>
 <% if client_signed_in? %>
-    <%= puts 'client' %>
+    LISTA DE TRABAJOS QUE OFREZCO
 <%end%>
 
-<%@jobs.each do |job|%>
-<%= render @job%>
+<% if !@jobs.nil? %>
+    <%= render @jobs%>
 <%end%>

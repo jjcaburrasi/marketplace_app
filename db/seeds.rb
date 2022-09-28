@@ -29,6 +29,13 @@ end
     password:              password,
     )
 
+    #Generate 2 job_request for each client.
+    rnd_monthly_salary= rand(900..1500)
+
+    2.times do |fakejob|
+        JobRequest.create!(client_id: n, job_function:Faker::Job.title,monthly_salary: rnd_monthly_salary, start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: "1")
+    end
+
 
 end
 
