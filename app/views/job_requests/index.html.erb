@@ -7,3 +7,7 @@
 <% if client_signed_in? %>
     <%= puts 'client' %>
 <%end%>
+
+<%@jobs.each do |job|%>
+<%= render @job%>
+<%end%>
