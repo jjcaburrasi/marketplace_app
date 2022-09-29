@@ -1,8 +1,21 @@
-<div class='container'>
-    <%@candidacies.each do |candidacy| %>
-        <h3>Job: <%= candidacy.job_request.job_function %></h3>
-        <p>Client: <%=candidacy.job_request.client.name%></p>
-        <p>Worker: <%=candidacy.worker.name%></p>
-        <p>Status: <%=candidacy.status%></p>
-    <%end%>
-</div>
+<% if admin_signed_in? %>
+    <div class='container'>
+     <h2> ALL CANDIDACIES </h2>
+        <%@candidacies.each do |candidacy| %>
+            <h3> Job: <%= candidacy.job_request.job_function %></h3>
+            <p>Client: <%=candidacy.job_request.client.name%></p>
+            <p>Worker: <%=candidacy.worker.name%></p>
+            <p>Status: <%=candidacy.status%></p>
+        <%end%>
+    </div>
+<% elsif worker_signed_in? %>
+    <div class='container'>
+    <h2> MY CANDIDACIES </h2>
+        <% current_worker.candidacies.each do |candidacy| %>
+            <h3> Job: <%= candidacy.job_request.job_function %></h3>
+            <p>Client: <%=candidacy.job_request.client.name%></p>
+            <p>Worker: <%=candidacy.worker.name%></p>
+            <p>Status: <%=candidacy.status%></p>
+        <%end%>
+    </div>
+<%end%>

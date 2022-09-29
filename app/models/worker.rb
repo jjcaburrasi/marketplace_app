@@ -10,4 +10,7 @@ validates :name, presence: true
 devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
   
+def applied?(job)
+  job_requests.include?(job)
+end
 end
