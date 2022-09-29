@@ -1,6 +1,6 @@
 class WorkersController < ApplicationController
     def show
-        @worker = current_worker
+        @worker = Worker.find(params[:id])
     end
 
     def index

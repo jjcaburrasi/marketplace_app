@@ -12,15 +12,18 @@ Client.create!(name:"client",
 Admin.create!(email: "a@a.com", password:"123456")
 
 # Generate a bunch of workers.
+skills = ['Driving', 'Tech', 'Construction', "Own motorcycle", "Work rotatory turn", "English",
+    "Spanish", "Capacity to load heavy weights", "Disability certificate"]
 20.times do |n|
     name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
     password = "password"
-    skills = ["Driving", "Tech", "Hard"]
+    rnd_number_skills = rand(1..5)
+    rnd_skills = skills.shuffle[1..rnd_number_skills]
     Worker.create!(name:  name,
     email: email,
     password:              password,
-    skills: skills
+    skills: rnd_skills
     )
 end
 
@@ -38,7 +41,9 @@ end
     rnd_monthly_salary= rand(900..1500)
 
     2.times do
-        JobRequest.create!(client: client, job_function:Faker::Job.title,monthly_salary: rnd_monthly_salary, start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
+        rnd_number_skills = rand(1..5)
+        rnd_skills = skills.shuffle[1..rnd_number_skills]
+        JobRequest.create!(client: client, job_function:Faker::Job.title,monthly_salary: rnd_monthly_salary, skills: rnd_skills, start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
     end
 
 

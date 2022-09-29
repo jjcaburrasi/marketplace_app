@@ -1,1 +1,8 @@
-<h1> user profile </h1>
+Name: <%= @worker.name %><br>
+E-Mail: <%= @worker.email %><br>
+Currently status: <%= @worker.working ? "Currently working" : "Currently not working" %><br>
+Rehirable status: <%= @worker.rehirable ? "Can be hired" : "Can not be hired" %><br>
+Skills:<br>
+<%@worker.skills.each do |skill| %>
+    <%= skill %><br>
+    <% end %>

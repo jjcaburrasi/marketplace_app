@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_29_033911) do
+ActiveRecord::Schema.define(version: 2022_09_29_071855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2022_09_29_033911) do
     t.float "monthly_salary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "skills", default: [], null: false, array: true
     t.index ["client_id"], name: "index_job_requests_on_client_id"
   end
 
