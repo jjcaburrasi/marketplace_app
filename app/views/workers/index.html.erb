@@ -1,0 +1,6 @@
+<div class="container">
+    <h2> All Workers </h2>
+        <%@workers.each do |worker|%>
+            <%= link_to worker.name, worker_path(worker) %>
+        <%end%>
+</div>

@@ -14,6 +14,15 @@ module ApplicationHelper
     worker_signed_in? || admin_signed_in? || client_signed_in?
   end
     
+  def which_jobs
+    if worker_signed_in? || admin_signed_in?
+      @jobs = JobRequest.all
+    elsif client_signed_in?
+      @jobs = JobRequest.where(client: current_client)
+    end
+    return @jobs
+  end
+
 
 
 end

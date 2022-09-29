@@ -9,7 +9,7 @@
         <ul class="dropdown-menu">
             <li class="divider"></li>
             <li><%= link_to "Profile", current_client %> </li>
-            <li><%= link_to "Log out", destroy_client_session_path, method: :delete %> </li>
+            <li><%= button_to "Log out", destroy_client_session_path, method: :delete %> </li>
             <li><%= link_to "Edit profile", edit_client_registration_path %> </li>
        </ul>
     </nav>

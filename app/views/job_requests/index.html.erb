@@ -1,11 +1,11 @@
 <% if worker_signed_in? %>
-    LISTA DE TRABAJOS DISPONIBLES
+    <h2> Available jobs </h2>
 <%end%>
 <% if admin_signed_in? %>
-   LISTA DE TRABAJOS PARA ADMINISTRAR
+   <h2> All jobs </h2>
 <%end%>
 <% if client_signed_in? %>
-    LISTA DE TRABAJOS QUE OFREZCO
+    <h2> My job requests </h2>
 <%end%>
 
 <% if !@jobs.nil? %>

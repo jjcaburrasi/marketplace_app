@@ -1,5 +1,6 @@
 class JobRequestsController < ApplicationController
+    include ApplicationHelper
     def index
-        @jobs = JobRequest.all
+        @jobs = which_jobs
     end
 end
