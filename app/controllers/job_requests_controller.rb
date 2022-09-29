@@ -10,6 +10,12 @@ class JobRequestsController < ApplicationController
         @job = JobRequest.find(params[:id]) 
     end
 
+    def create
+    end
+
+    def update
+    end
+
     private
         def authorized?
             return unless !someone_signed_in?
