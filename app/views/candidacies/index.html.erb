@@ -1,0 +1,8 @@
+<div class='container'>
+    <%@candidacies.each do |candidacy| %>
+        <h3>Job: <%= candidacy.job_request.job_function %></h3>
+        <p>Client: <%=candidacy.job_request.client.name%></p>
+        <p>Worker: <%=candidacy.worker.name%></p>
+        <p>Status: <%=candidacy.status%></p>
+    <%end%>
+</div>

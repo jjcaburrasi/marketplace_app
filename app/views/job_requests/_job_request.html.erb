@@ -2,5 +2,10 @@
     <%@jobs.each do |job| %>
         <h3><%= job.job_function%></h2>
             <p> Vacancies: <%=job.vacancies_count%></p>
+            <%if current_worker%>
+                <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+            <%else%>
+                <p><%= link_to 'More information', job_request_path(job)%></p>
+            <%end%>
     <%end%>
 </div>

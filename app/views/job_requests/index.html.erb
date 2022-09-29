@@ -1,11 +1,11 @@
-<% if worker_signed_in? %>
+<% if worker_signed_in? %> 
     <h2> Available jobs </h2>
-<%end%>
-<% if admin_signed_in? %>
+<% elsif admin_signed_in? %>
    <h2> All jobs </h2>
-<%end%>
-<% if client_signed_in? %>
+<% elsif client_signed_in? %>
     <h2> My job requests </h2>
+<%else%>
+    <h2> Explore available jobs </h2>
 <%end%>
 
 <% if !@jobs.nil? %>

@@ -1,0 +1,12 @@
+<% provide(:button_text, 'Apply') %>
+<div class='container'>
+    <h3><%= @job.job_function%></h3>
+    <p> Vacancies: <%=@job.vacancies_count%></p>
+    <p> Address: <%=@job.address%></p>
+        <% if current_worker%>
+                <%= form_for ([@job, @candidacy]) do |f| %>
+                    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                <% end %>
+        <%end%>
+</div>
+
