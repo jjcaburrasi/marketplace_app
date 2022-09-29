@@ -1,1 +1,6 @@
-<%= job_request.client_id%>
+<div class='container'>
+    <%@jobs.each do |job| %>
+        <h3><%= job.job_function%></h2>
+            <p> Vacancies: <%=job.vacancies_count%></p>
+    <%end%>
+</div>
