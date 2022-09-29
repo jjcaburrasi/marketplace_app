@@ -19,6 +19,8 @@ module ApplicationHelper
       @jobs = JobRequest.all
     elsif client_signed_in?
       @jobs = JobRequest.where(client: current_client)
+    else
+      @jobs = JobRequest.all
     end
     return @jobs
   end
