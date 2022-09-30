@@ -23,7 +23,6 @@ class CandidaciesController < ApplicationController
             if !compare_skills
                 flash[:danger] = "You don't have the required skills"
                 redirect_to job_request_path(@job)
-                
             else
                 if @candidacy.save
                     flash[:success] = "Application was successfully created."
@@ -42,6 +41,10 @@ class CandidaciesController < ApplicationController
 
     def index
         @candidacies = Candidacy.all
+        @candidacies_0 = Candidacy.where(status: 'Application Submitted')
+        @candidacies_1 = Candidacy.where(status: 'Interview')
+        @candidacies_2 = Candidacy.where(status: 'Hired')
+        @candidacies_3 = Candidacy.where(status: 'Rejected')
     end
 
     def edit
@@ -57,15 +60,19 @@ class CandidaciesController < ApplicationController
         if @candidacy.status == 'Hired'
             @candidacy.worker.update(working:true)
             @job.update(vacancies_count: @job.vacancies_count-1, filled_vacancies: @job.filled_vacancies+1)
-            
             Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
-            change_status(@candidacy)
+            change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
         end
     end
 
-    def change_status(candidacy)
-        candidacy.update(status: 'Inactive')
-        candidacy.save
+    def change_status(candidacies)
+        candidacies.each do |candidacy|
+            candidacy.update(status: 'Inactive')
+            candidacy.save
+        end
+    end
+
+    def destroy
     end
 
     private

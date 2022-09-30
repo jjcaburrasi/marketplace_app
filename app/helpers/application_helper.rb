@@ -13,7 +13,7 @@ module ApplicationHelper
   def someone_signed_in?
     worker_signed_in? || admin_signed_in? || client_signed_in?
   end
-    
+
   def which_jobs
     if worker_signed_in? || admin_signed_in?
       @jobs = JobRequest.where.not(vacancies_count: 0)

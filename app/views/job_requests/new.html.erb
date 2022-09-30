@@ -22,12 +22,25 @@
                 <%= f.number_field :vacancies_count %>
             </div>
             <br/>
-            <%= f.label :skills %><br/>
-            <div class='field'>
-                <% @skills.each do |skill|%>
-                    <%= f.check_box :skills, {multiple: true}, skill, nil %>
-                    <%= f.label skill%><br/>
-                <%end%>
+            <div class='skills'>
+                <div>
+                    <%= f.label :necessary_skills %><br/>
+                    <div class='field'>
+                        <% @skills.each do |skill|%>
+                            <%= f.check_box :skills_necessary, {multiple: true}, skill, nil %>
+                            <%= f.label skill%><br/>
+                        <%end%>
+                    </div>
+                </div>
+                <div>
+                    <%= f.label :desirable_skills %><br/>
+                    <div class='field'>
+                        <% @skills.each do |skill|%>
+                            <%= f.check_box :skills, {multiple: true}, skill, nil %>
+                            <%= f.label skill%><br/>
+                        <%end%>
+                    </div>
+                </div>
             </div>
             <div class='field'>
                 <%= f.label :start_date %><br>
