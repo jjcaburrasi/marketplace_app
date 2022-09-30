@@ -1,0 +1,19 @@
+<div class='container'>
+    <h2> Placements</h2>
+    <div class='row'>
+        <div class='col-lg-6'>
+            <h3>Current placements</h3>
+            <%@current_placements.each do |placement|%>
+                <p><%=placement.job_request.job_function%></p>
+                <p><%=placement.worker.name%></p>
+            <%end%>
+        </div>
+        <div class='col-lg-6'>
+           <h3>Past placements</h3>
+            <%@old_placements.each do |placement|%>
+                <p><%=placement.job_request.job_function%></p>
+                <p><%=placement.worker.name%></p>
+            <%end%>
+        </div>
+    </div>
+</div>

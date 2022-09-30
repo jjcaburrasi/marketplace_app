@@ -1,6 +1,10 @@
 <div class="container">
     <h2> All Workers </h2>
+    <div class='cards'>
         <%@workers.each do |worker|%>
-            <%= link_to worker.name, worker_path(worker) %>
+            <div class='card'>
+                <%= link_to worker.name, worker_path(worker) %>
+            </div>
         <%end%>
+    </div>
 </div>

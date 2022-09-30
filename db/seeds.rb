@@ -1,8 +1,10 @@
+Candidacy.delete_all
 JobRequest.delete_all
+Placement.delete_all
 Worker.delete_all
 Client.delete_all
 Admin.delete_all
-Candidacy.delete_all
+
 
 Worker.create!(name:"worker", 
                 email: "w@w.com", password:"123456", skills: ["Driving License"])
@@ -53,15 +55,15 @@ workers = Worker.all
 jobs = JobRequest.all
 rnd_job = rand(1..JobRequest.count)
 
-workers.each do |worker|
-    2.times {
-        rnd_job = rand(1..JobRequest.count)
-        job = JobRequest.find(rnd_job)
-        Candidacy.create!(worker: worker, job_request: job)
+# workers.each do |worker|
+#     2.times {
+#         rnd_job = rand(1..JobRequest.count)
+#         job = JobRequest.find(rnd_job)
+#         Candidacy.create!(worker: worker, job_request: job)
 
-    }
+#     }
     
-end
+# end
 
 
 

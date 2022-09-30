@@ -39,9 +39,13 @@ body {
     color: #fff;
     background-color: #76b5c5;
     border-color: #76b5c5;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
+
+// .home-btn{
+//     width: 250px;  not working
+// }
 
 li{
     list-style-type: none;
@@ -63,11 +67,12 @@ li{
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 40px;
     letter-spacing: -1px;
     margin-bottom: 30px;
     text-align: center;
     font-weight: normal;
+    color: #76b5c5;
     // color: #777;
 }
 
@@ -75,4 +80,33 @@ h2 {
     display: flex;
     align-content: left;
     margin-top: 50px;
+}
+
+.card {
+	width: 100%;
+	// margin: 10px;
+    // height : 100px;
+	background-color: #F7F7F7;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+    // border: 1px solid black;
+    padding: 10px;
+
+  }
+
+.cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
+    flex-grow: 1;
+    margin: auto;
+    justify-content: space-around;
+    a {
+      text-decoration: none;
+    }
+    margin-bottom: 10px;
+}
+
+.worker-card{
+    padding: 15px;
+    margin: 10px;
 }

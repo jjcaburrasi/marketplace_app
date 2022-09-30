@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_29_071855) do
+ActiveRecord::Schema.define(version: 2022_09_30_031340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,8 +103,10 @@ ActiveRecord::Schema.define(version: 2022_09_29_071855) do
     t.float "monthly_salary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "job_request_id"
     t.index ["candidacy_id"], name: "index_placements_on_candidacy_id"
     t.index ["client_id"], name: "index_placements_on_client_id"
+    t.index ["job_request_id"], name: "index_placements_on_job_request_id"
     t.index ["worker_id"], name: "index_placements_on_worker_id"
   end
 
@@ -132,6 +134,7 @@ ActiveRecord::Schema.define(version: 2022_09_29_071855) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "skills", default: [], null: false, array: true
+    t.boolean "available", default: true
     t.index ["confirmation_token"], name: "index_workers_on_confirmation_token", unique: true
     t.index ["email"], name: "index_workers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_workers_on_reset_password_token", unique: true
@@ -143,5 +146,6 @@ ActiveRecord::Schema.define(version: 2022_09_29_071855) do
   add_foreign_key "job_requests", "clients"
   add_foreign_key "placements", "candidacies"
   add_foreign_key "placements", "clients"
+  add_foreign_key "placements", "job_requests"
   add_foreign_key "placements", "workers"
 end
