@@ -1,7 +1,7 @@
 class JobRequestsController < ApplicationController
     before_action :authorized?, except: [:index]
     before_action :can_create?, only: [:new, :create]
-    before_action :can_update, only: [:edit, :update]
+    before_action :can_update?, only: [:edit, :update]
     include ApplicationHelper
     def index
         @jobs = which_jobs
@@ -28,7 +28,19 @@ class JobRequestsController < ApplicationController
         end
     end
 
+    def edit
+        @job = JobRequest.find(params[:id])
+        @skills = skills
+    end
+
     def update
+        @job = JobRequest.find(params[:id])
+        if @job.update(jobrequest_params)
+            flash[:success] = "Job updated"
+            redirect_to @job
+        else
+            render 'edit'
+        end         
     end
 
     def destroy
@@ -49,7 +61,7 @@ class JobRequestsController < ApplicationController
         end
 
         def can_update?
-            return unless !current_admin
+            return unless !current_client
         end
 
         def jobrequest_params

@@ -22,7 +22,7 @@
                     <%if current_worker%>
                         <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
                     <%elsif current_client%>
-                        <%= button_to 'delete job', job_request_path(job), :method => :delete%>
+                        <%= button_to 'delete job', job_request_path(job), data: { confirm: 'Are you sure?' }, :method => :delete%>
                         <p><%= link_to 'More information' , job_request_path(job)%></p>
                     <%else%>
                         <p><%= link_to 'More information', job_request_path(job)%></p>
