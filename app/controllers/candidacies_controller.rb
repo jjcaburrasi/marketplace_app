@@ -16,12 +16,16 @@ class CandidaciesController < ApplicationController
         @candidacy.start_date = @job.start_date
         if !current_worker.working?
             if @candidacy.save
-                redirect_to job_requests_path, notice: "Application was successfully created."
+                flash[:success] = "Application was successfully created."
+                redirect_to job_requests_path
             else
-                redirect_to job_request_path(@job), notice:"Could not be created"
+                flash[:danger] = "Could not be created"
+                redirect_to job_request_path(@job)
             end
         else
             flash[:danger] = "You are already working, you can not apply to a job"
+            redirect_to job_request_path(@job)
+           
         end
     end
 
