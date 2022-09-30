@@ -20,5 +20,16 @@
             <p>Worker: <%=candidacy.worker.name%></p>
             <p>Status: <%=candidacy.status%></p>
         <%end%>
+
+    <% elsif client_signed_in? %>
+        <h2> Candidacies to my Jobs</h2>
+        <% current_client.job_requests.each do |jobs| %>
+            <% jobs.candidacies.each do |candidacy| %>
+            <h3> Job: <%= jobs.job_function %></h3>
+            <p>Client: <%=jobs.client.name%></p>
+            <p>Worker: <%=candidacy.worker.name%></p>
+            <p>Status: <%=candidacy.status%></p>
+            <%end%>
+        <%end%>
     <%end%>
 </div>
