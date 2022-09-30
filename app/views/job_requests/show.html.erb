@@ -3,6 +3,9 @@
     <%= link_to 'Back to jobs', job_requests_path%>
     <h3><%= @job.job_function%></h3>
     <p> Vacancies: <%=@job.vacancies_count%></p>
+     <p> Necessary Skills:   <%@job.skills_necessary.each do |skill| %>
+                            <%= skill %><br>
+                            <% end %></p>
     <p> Desirable Skills:   <%@job.skills.each do |skill| %>
                             <%= skill %><br>
                             <% end %></p>

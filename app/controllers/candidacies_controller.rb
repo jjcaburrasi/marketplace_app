@@ -15,12 +15,23 @@ class CandidaciesController < ApplicationController
         @candidacy.job_request = @job
         @candidacy.start_date = @job.start_date
         if !current_worker.working?
-            if @candidacy.save
-                flash[:success] = "Application was successfully created."
-                redirect_to job_requests_path
-            else
-                flash[:danger] = "Could not be created"
+            p current_worker.skills
+            p @job.skills_necessary
+            a1= Set.new(current_worker.skills)
+            a2= Set.new(@job.skills_necessary)
+            compare_skills=a2.subset?(a1)
+            if !compare_skills
+                flash[:danger] = "You don't have the required skills"
                 redirect_to job_request_path(@job)
+                
+            else
+                if @candidacy.save
+                    flash[:success] = "Application was successfully created."
+                    redirect_to job_requests_path
+                else
+                    flash[:danger] = "Could not be created"
+                    redirect_to job_request_path(@job)
+                end
             end
         else
             flash[:danger] = "You are already working, you can not apply to a job"

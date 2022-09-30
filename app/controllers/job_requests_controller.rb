@@ -15,6 +15,7 @@ class JobRequestsController < ApplicationController
     def new
         @job = JobRequest.new
         @skills = skills
+        @skills_necessary = skills
     end
 
 
@@ -31,6 +32,7 @@ class JobRequestsController < ApplicationController
     def edit
         @job = JobRequest.find(params[:id])
         @skills = skills
+        @skills_necessary = skills
     end
 
     def update
@@ -66,7 +68,7 @@ class JobRequestsController < ApplicationController
         end
 
         def jobrequest_params
-            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, skills:[])
+            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, skills:[],skills_necessary: [])
         end
 
         def skills

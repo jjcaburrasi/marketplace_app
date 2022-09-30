@@ -7,6 +7,16 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
+  
+  <div class="field">
+    <%= f.label :skills %><br />
+    <% array_skills = ['Driving License', 'Tech', 'Construction', "Own motorcycle", "Work rotatory turn", "English",
+    "Spanish", "Capacity to load heavy weights", "Disability certificate"]%>
+    <% array_skills.each do |skill|%>
+    <%= f.check_box :skills, {multiple: true}, skill, nil %>
+    <%= f.label skill%>
+    <%end%>
+  </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

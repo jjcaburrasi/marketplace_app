@@ -20,6 +20,13 @@
                 <%= f.number_field :vacancies_count %>
             </div>
             <br/>
+            <%= f.label :skills_necessary %><br/>
+            <div class='field'>
+                <% @skills_necessary.each do |skill|%>
+                    <%= f.check_box :skills_necessary, {multiple: true}, skill, nil %>
+                    <%= f.label skill%><br/>
+                <%end%>
+            </div>
             <%= f.label :skills %><br/>
             <div class='field'>
                 <% @skills.each do |skill|%>
