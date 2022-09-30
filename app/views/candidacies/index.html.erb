@@ -27,7 +27,7 @@
             <% jobs.candidacies.each do |candidacy| %>
             <h3> Job: <%= jobs.job_function %></h3>
             <p>Client: <%=jobs.client.name%></p>
-            <p>Worker: <%=candidacy.worker.name%></p>
+            <p><%= link_to candidacy.worker.name, worker_path(candidacy.worker)%></p>
             <p>Status: <%=candidacy.status%></p>
             <%end%>
         <%end%>
