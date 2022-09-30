@@ -1,49 +1,54 @@
-<% provide(:button_text, 'Edit job request') %>
-<h1>Edit your Job Request</h1>
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-<%= form_with(model: @job, local: true) do |f| %>
-  <div class='field'>
-                <%= f.label :Description %><br/>
-                <%= f.text_field :job_function%>
+<div class='container'>
+    <% provide(:button_text, 'Edit job request') %>
+    <h1>Edit your Job Request</h1>
+    <%= form_with(model: @job, local: true) do |f| %>
+    <div class='field'>
+            <%= f.label :Description %><br/>
+            <%= f.text_field :job_function%>
+        </div>
+        <div class='field'>
+            <%= f.label :address %><br/>
+            <%= f.text_field :address%>
+        </div>
+        <div class='field'>
+            <%= f.label :monthly_salary %><br/>
+            <%= f.number_field :monthly_salary %>
+        </div>
+        <div class="field">
+            <%= f.label :amout_of_workers %><br>
+            <%= f.number_field :vacancies_count %>
+        </div>
+        <br/>
+        <div class='skills'>
+            <div>
+                <%= f.label :necessary_skills %><br/>
+                <div class='field'>
+                    <% @skills_necessary.each do |skill|%>
+                        <%= f.check_box :skills_necessary, {multiple: true}, skill, nil %>
+                        <%= f.label skill%><br/>
+                    <%end%>
+                </div>
             </div>
-            <div class='field'>
-                <%= f.label :address %><br/>
-                <%= f.text_field :address%>
+            <div>
+                <%= f.label :desirable_skills %><br/>
+                <div class='field'>
+                    <% @skills.each do |skill|%>
+                        <%= f.check_box :skills, {multiple: true}, skill, nil %>
+                        <%= f.label skill%><br/>
+                    <%end%>
+                </div>
             </div>
-            <div class='field'>
-                <%= f.label :monthly_salary %><br/>
-                <%= f.number_field :monthly_salary %>
-            </div>
-            <div class="field">
-                <%= f.label :amout_of_workers %><br>
-                <%= f.number_field :vacancies_count %>
-            </div>
-            <br/>
-            <%= f.label :skills_necessary %><br/>
-            <div class='field'>
-                <% @skills_necessary.each do |skill|%>
-                    <%= f.check_box :skills_necessary, {multiple: true}, skill, nil %>
-                    <%= f.label skill%><br/>
-                <%end%>
-            </div>
-            <%= f.label :skills %><br/>
-            <div class='field'>
-                <% @skills.each do |skill|%>
-                    <%= f.check_box :skills, {multiple: true}, skill, nil %>
-                    <%= f.label skill%><br/>
-                <%end%>
-            </div>
-            <div class='field'>
-                <%= f.label :start_date %><br>
-                <%= f.date_field :start_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y")%>
-            </div>
-            <div class='field'>
-                <%= f.label :end_date %><br>
-                <%= f.date_field :end_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y")%>
-            </div>
-            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
-
+        </div>
+        <div class='field'>
+            <%= f.label :start_date %><br>
+            <%= f.date_field :start_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y")%>
+        </div>
+        <div class='field'>
+            <%= f.label :end_date %><br>
+            <%= f.date_field :end_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y")%>
+        </div>
+        <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
+</div>
 
  
