@@ -62,6 +62,7 @@ class JobRequestsController < ApplicationController
 
         def can_update?
             return unless !current_client
+            redirect to job_requests_path
         end
 
         def jobrequest_params

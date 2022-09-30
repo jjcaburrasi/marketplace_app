@@ -1,5 +1,5 @@
 class CandidaciesController < ApplicationController
-    # before_action :authorized?, only: [:index]
+    before_action :authorized?, only: [:index]
     # JobRequest.all.each do |job|
     #     irb(main):007:1*   pp  job.skills.intersection(skills).size
     #     irb(main):008:0> end
