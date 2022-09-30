@@ -15,8 +15,6 @@ class CandidaciesController < ApplicationController
         @candidacy.job_request = @job
         @candidacy.start_date = @job.start_date
         if !current_worker.working?
-            p current_worker.skills
-            p @job.skills_necessary
             a1= Set.new(current_worker.skills)
             a2= Set.new(@job.skills_necessary)
             compare_skills=a2.subset?(a1)

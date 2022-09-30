@@ -1,4 +1,5 @@
 <div class="container">
+<% if !current_client%>
     <h2> All Workers </h2>
     <div class='cards'>
         <%@workers.each do |worker|%>
@@ -6,5 +7,17 @@
                 <%= link_to worker.name, worker_path(worker) %>
             </div>
         <%end%>
+<% else %>
+ <h2> Available Workers </h2>
+ <div class='cards'>
+    <%@workers.each do |worker|%>
+    <% if worker.available?%>
+        <div class='card'>
+            <%= link_to worker.name, worker_path(worker) %>
+            
+        </div>
+    <%end%>
+    <%end%>
+<%end%>
     </div>
 </div>
