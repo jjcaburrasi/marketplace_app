@@ -13,6 +13,7 @@ class CandidaciesController < ApplicationController
         @candidacy = Candidacy.new
         @candidacy.worker = current_worker
         @candidacy.job_request = @job
+        @candidacy.start_date = @job.start_date
         if !current_worker.working?
             if @candidacy.save
                 redirect_to job_requests_path, notice: "Application was successfully created."
@@ -28,8 +29,31 @@ class CandidaciesController < ApplicationController
         @candidacies = Candidacy.all
     end
 
+    def edit
+        @candidacy = Candidacy.find(params[:id])
+    end
+
+    def update
+        @candidacy = Candidacy.find(params[:id])
+        @job = @candidacy.job_request
+        if @candidacy.update(candidacy_params)
+            redirect_to candidacies_path, notice: "Status updated."
+        end
+        if @candidacy.status == 'Hired'
+            @candidacy.worker.update(working:true)
+            @job.update(vacancies_count: @job.vacancies_count-1)
+            Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
+            change_status(@candidacy)
+        end
+    end
+
+    def change_status(candidacy)
+        candidacy.update(status: 'Inactive')
+        candidacy.save
+    end
+
     private
-    def application_params
+    def candidacy_params
       params.require(:candidacy).permit(:status, :start_date)
     end
 

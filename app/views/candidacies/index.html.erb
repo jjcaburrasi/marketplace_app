@@ -1,21 +1,24 @@
-<% if admin_signed_in? %>
-    <div class='container'>
-     <h2> ALL CANDIDACIES </h2>
-        <%@candidacies.each do |candidacy| %>
-            <h3> Job: <%= candidacy.job_request.job_function %></h3>
-            <p>Client: <%=candidacy.job_request.client.name%></p>
-            <p>Worker: <%=candidacy.worker.name%></p>
-            <p>Status: <%=candidacy.status%></p>
-        <%end%>
-    </div>
-<% elsif worker_signed_in? %>
-    <div class='container'>
-    <h2> MY CANDIDACIES </h2>
+<% provide(:button_text, 'Change status') %>
+<div class='container'>
+    <% if admin_signed_in? %>
+        <h2> Candidacies</h2>
+            <%@candidacies.each do |candidacy| %>
+                <h3> Job: <%= candidacy.job_request.job_function %></h3>
+                <p>Client: <%=candidacy.job_request.client.name%></p>
+                <p>Worker: <%=candidacy.worker.name%></p>
+                <p>Status: <%=candidacy.status%></p>
+                <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
+                        <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
+                        <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                <% end %>
+            <%end%>
+    <% elsif worker_signed_in? %>
+        <h2> My candidacies </h2>
         <% current_worker.candidacies.each do |candidacy| %>
             <h3> Job: <%= candidacy.job_request.job_function %></h3>
             <p>Client: <%=candidacy.job_request.client.name%></p>
             <p>Worker: <%=candidacy.worker.name%></p>
             <p>Status: <%=candidacy.status%></p>
         <%end%>
-    </div>
-<%end%>
+    <%end%>
+</div>
