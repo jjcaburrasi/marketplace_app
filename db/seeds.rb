@@ -55,15 +55,38 @@ workers = Worker.all
 jobs = JobRequest.all
 rnd_job = rand(1..JobRequest.count)
 
-# workers.each do |worker|
-#     2.times {
-#         rnd_job = rand(1..JobRequest.count)
-#         job = JobRequest.find(rnd_job)
-#         Candidacy.create!(worker: worker, job_request: job)
+workers.each do |worker|
+    2.times {
+        rnd_job = rand(1..JobRequest.count)
+        job = JobRequest.find(rnd_job)
+        Candidacy.create!(worker: worker, job_request: job)
 
-#     }
+    }
     
-# end
+end
+
+#Generate placements (4 finished and 4 current)
+#4 finished
+4.times do |n|
+
+Placement.create!(client_id: n+2, worker_id: n+2, 
+                                candidacy_id: n+2, start_date: "20/08/2022", end_date: "31/08/2022", 
+                                monthly_salary: 1000, created_at: nil, updated_at: nil, 
+                                job_request_id:n+2)
+end
+
+#4 current 
+
+4.times do |n|
+
+Placement.create!(client_id: n+3, worker_id: n+3, 
+                                candidacy_id: n+3, start_date: "20/08/2022", end_date: "31/08/2023", 
+                                monthly_salary: 1000, created_at: nil, updated_at: nil, 
+                                job_request_id:n+3)
+
+
+end
+
 
 
 
