@@ -10,7 +10,7 @@
             Availability status: <%= @worker.available ? "Available" : "Not Available" %><br>
             Skills:<br>
             <%@worker.skills.each do |skill| %>
-                <%= skill %><br>
+                <p><%= skill %></p><br>
                 <% end %>
 
             <%if current_admin %>

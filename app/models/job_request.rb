@@ -36,9 +36,10 @@ class JobRequest < ApplicationRecord
                 counter+=1
             end
         end
-    final_counter= (counter/skills_job.count)*100 
     end
-end
+    final_counter= ((counter/skills_job.count)*100).round(2)
+    end
+
 
 
 

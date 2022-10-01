@@ -1,0 +1,17 @@
+<h2> Suggested workers for <%=@job.job_function%></h2>
+<div class='cards'>
+    <% @workers.each do |worker| %>
+        <% if worker.available? %>
+            <div class='card'>
+                <%= link_to worker.name, worker_path(worker) %>   
+                <p>Fit rate: <%= worker.fit_rate(@job, worker) %><p>
+                <p> Skills: </p>
+                <%worker.skills.each do |skill| %>
+                    <p><%= skill %></p><br>
+                <% end %>
+                <%= link_to 'Send job notice', '#'%>
+
+            </div>
+        <%end%>
+    <%end%>
+</div>

@@ -56,6 +56,8 @@ class JobRequestsController < ApplicationController
         redirect_to job_requests_path, notice: 'Job succesfully destroyed',  status: :see_other 
     end
 
+
+
     
 
     private
@@ -86,4 +88,6 @@ class JobRequestsController < ApplicationController
         def downcase
             @search = params[:content].downcase
         end
+
+        
 end
