@@ -8,10 +8,23 @@ class PlacementsController < ApplicationController
     def show
         @placement = Placement.find(params[:id])
     end
-end
- private
 
- def authorized?
-    return unless !current_admin
-    redirect_to root_path, alert: 'Page not found'
+    def update
+        @placement = Placement.find(params[:id])
+        if @placement.update(placement_params)
+            redirect_to placement_path(@placement), notice: "Date updated."
+        end
+    end
+
+    private
+
+    def placement_params
+        params.require(:placement).permit(:end_date)
+    end
+
+    def authorized?
+        return unless !current_admin
+        redirect_to root_path, alert: 'Page not found'
+    end
+
 end

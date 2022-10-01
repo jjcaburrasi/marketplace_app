@@ -185,3 +185,12 @@ input[type='checkbox'] {
     display: flex;
     justify-content: space-around;
 }
+
+.show-card{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F7F7F7;
+	box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}

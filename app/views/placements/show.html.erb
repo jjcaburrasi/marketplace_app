@@ -1,9 +1,20 @@
+<% provide(:button_text, 'Change date') %>
 <div class='container'>
-    Job:<p><%=@placement.job_request.job_function%></p>
-    Company: <p><%=@placement.client.name%></p>
-    Worker:<p><%=@placement.worker.name%></p>
-    Start date:<p><%=@placement.start_date%></p>
-    End Date:<p><%=@placement.end_date%></p>
-    Monthly Salary:<p><%=@placement.monthly_salary%></p>
-    <br>
+    <div class='show-card'>
+        <p>Job: <%=@placement.job_request.job_function%></p>
+         <p>Company: <%=@placement.client.name%></p>
+        <p>Worker: <%=@placement.worker.name%></p>
+        <p>Start date: <%=@placement.start_date%></p>
+        <p>End Date: <%=@placement.end_date%></p>
+        <p>Monthly Salary: <%=@placement.monthly_salary%></p>
+        <%if current_admin %>
+            <p> Extend engagement </p>
+            <%= form_for (@placement) do |f| %>
+                <%= f.label :end_date %><br>
+                <%= f.date_field :end_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y")%>
+                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+            <% end %>
+        <%end%>
+
+    </div>
 </div>
