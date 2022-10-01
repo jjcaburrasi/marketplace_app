@@ -1,30 +1,32 @@
 <% provide(:button_text, 'Apply') %>
 <div class='container'>
     <%= link_to 'Back to jobs', job_requests_path%>
-    <h3><%= @job.job_function%></h3>
-    <p> Vacancies: <%=@job.vacancies_count%></p>
-     <p> Necessary Skills:   <%@job.skills_necessary.each do |skill| %>
-                            <%= skill %><br>
-                            <% end %></p>
-    <p> Desirable Skills:   <%@job.skills.each do |skill| %>
-                            <%= skill %><br>
-                            <% end %></p>
-    <p> Monthly Salary: <%=@job.monthly_salary %> €</p>
-    <p> Address: <%=@job.address%></p>
-    <% if current_worker %>
-        <%if current_worker.applied?(@job)%>
-            You have already applied
-        <% else %>
-            <%= form_for ([@job, @candidacy]) do |f| %>
-                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <div class='show-card'>
+        <h3><%= @job.job_function%></h3>
+        <p> Vacancies: <%=@job.vacancies_count%></p>
+        <p> Necessary Skills:   <%@job.skills_necessary.each do |skill| %>
+                                <%= skill %><br>
+                                <% end %></p>
+        <p> Desirable Skills:   <%@job.skills.each do |skill| %>
+                                <%= skill %><br>
+                                <% end %></p>
+        <p> Monthly Salary: <%=@job.monthly_salary %> €</p>
+        <p> Address: <%=@job.address%></p>
+        <% if current_worker %>
+            <%if current_worker.applied?(@job)%>
+                You have already applied
+            <% else %>
+                <%= form_for ([@job, @candidacy]) do |f| %>
+                    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                <% end %>
             <% end %>
-        <% end %>
-    <%end%>
-    <% if current_client%>
-        <p> Vacancies filled: <%=@job.filled_vacancies%></p>
-        <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , candidacies_path %></p>
-        <p><%= link_to 'Edit Job Request' , edit_job_request_path(@job) %></p>
-        <p><%= link_to 'Suggested Workers', "#"%></p>
-    <%end%>
+        <%end%>
+        <% if current_client%>
+            <p> Vacancies filled: <%=@job.filled_vacancies%></p>
+            <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , candidacies_path %></p>
+            <p><%= link_to 'Edit Job Request' , edit_job_request_path(@job) %></p>
+            <p><%= link_to 'Suggested Workers', "#"%></p>
+        <%end%>
+    </div>
 </div>
 
