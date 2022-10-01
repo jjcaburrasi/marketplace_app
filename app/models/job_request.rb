@@ -20,17 +20,21 @@ class JobRequest < ApplicationRecord
     counter = 0.0
     skills_worker = worker.skills
     skills_job = job.skills
-    skills_worker.each do |skill|
-        if skills_job.include?(skill)
-            counter+=1
-            
+    skills_must_job = job.skills_necessary
+    p a1= Set.new(skills_worker)
+    p a2= Set.new(skills_must_job)
+    p compare_skills = a2.subset?(a1)
+    if !compare_skills
+        0
+    else
+        skills_worker.each do |skill|
+            if skills_job.include?(skill)
+                counter+=1
+            end
         end
+    final_counter= (counter/skills_job.count)*100 
     end
-    final_counter= (counter/skills_job.count)*100
-    
-    
-        
-    end
+end
 
 
 
