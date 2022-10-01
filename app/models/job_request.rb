@@ -16,14 +16,18 @@ class JobRequest < ApplicationRecord
         workers.include?(worker)
     end
 
+    def self.find_jobs(job_search)
+        JobRequest.where("lower(job_function) LIKE ? ","%" + job_search + "%")
+    end
+
     def fit_rate (job, worker)
     counter = 0.0
     skills_worker = worker.skills
     skills_job = job.skills
     skills_must_job = job.skills_necessary
-    p a1= Set.new(skills_worker)
-    p a2= Set.new(skills_must_job)
-    p compare_skills = a2.subset?(a1)
+    a1= Set.new(skills_worker)
+    a2= Set.new(skills_must_job)
+    compare_skills=a2.subset?(a1)
     if !compare_skills
         0
     else

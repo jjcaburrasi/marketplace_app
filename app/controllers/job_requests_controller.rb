@@ -2,6 +2,7 @@ class JobRequestsController < ApplicationController
     before_action :authorized?, except: [:index]
     before_action :can_create?, only: [:new, :create]
     before_action :can_update?, only: [:edit, :update]
+    before_action :downcase, only: [:search_jobs]
     include ApplicationHelper
     def index
         @jobs = which_jobs
@@ -16,6 +17,10 @@ class JobRequestsController < ApplicationController
         @job = JobRequest.new
         @skills = skills
         @skills_necessary = skills
+    end
+
+    def search_jobs
+        @find_jobs=JobRequest.find_jobs(@search)
     end
 
 
@@ -76,5 +81,9 @@ class JobRequestsController < ApplicationController
         def skills
             array_skills = ['Driving License', 'Tech', 'Construction', "Own motorcycle", "Work rotatory turn", "English",
             "Spanish", "Capacity to load heavy weights", "Disability certificate"]
+        end
+
+        def downcase
+            @search = params[:content].downcase
         end
 end

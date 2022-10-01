@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'admins/show'
   get 'clients/show'
+  get  '/search_workers', to: 'workers#search_workers'
+  get  '/search_jobs',    to: 'job_requests#search_jobs'
   root "static_pages#home"
   devise_for :admins
   devise_for :clients

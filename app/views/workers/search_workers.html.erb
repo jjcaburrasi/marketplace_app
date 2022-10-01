@@ -1,0 +1,7 @@
+<h2> Search Workers </h2>
+    <div class='cards'>
+        <%@workers.each do |worker|%>
+            <div class='card'>
+                <%= link_to worker.name, worker_path(worker) %>
+            </div>
+        <%end%>

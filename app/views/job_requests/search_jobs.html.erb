@@ -1,0 +1,22 @@
+<div class='cards'>
+<%@find_jobs.each do |job| %>
+<%if job.fit_rate(job, current_worker) >=80 %>
+    <div class='card'>
+        <h3><%= job.job_function%></h2>
+        <p> Vacancies: <%=job.vacancies_count%></p>
+        <p> Company:   <%=job.client.name%></p>
+        <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+        GOOD JOB FOR YOU
+        <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+    </div>
+<%else%>
+    <div class='card'>
+            <h3><%= job.job_function%></h2>
+            <p> Vacancies: <%=job.vacancies_count%></p>
+            <p> Company:   <%=job.client.name%></p>
+            <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+            <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+        </div>
+<%end%>
+<%end%>
+</div>
