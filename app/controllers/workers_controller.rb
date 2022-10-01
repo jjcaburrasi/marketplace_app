@@ -6,9 +6,8 @@ class WorkersController < ApplicationController
     def index
         @workers = Worker.all
     end
-    def search_workers
-        skills = params[:skills]
-        @workers = Worker.where(skills: skills)
+    def search_workers  
+        @workers = Worker.where(skills: params[:skills])
     end
 
     private
