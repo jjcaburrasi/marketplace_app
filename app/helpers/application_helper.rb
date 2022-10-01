@@ -25,6 +25,4 @@ module ApplicationHelper
     return @jobs
   end
 
-
-
 end

@@ -17,27 +17,28 @@
             <%= form_with url: "/search_jobs", method: :get do |form| %>
             <%= form.text_field :content, placeholder: "Search job..." %>
             <%= form.submit "Search", class: "btn btn-primary" %>
-        <% end %>
+            <% end %>
         <div class='cards'>
-            <%@jobs.each do |job| %>
-            <%if job.fit_rate(job, current_worker) >=80 %>
-                <div class='card'>
-                    <h3><%= job.job_function%></h2>
-                    <p> Vacancies: <%=job.vacancies_count%></p>
-                    <p> Company:   <%=job.client.name%></p>
-                    <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
-                    GOOD JOB FOR YOU
-                    <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
-                </div>
-            <%else%>
-                <div class='card'>
+            <%@jobs1 = @jobs.sort { |a,b| a.fit_rate(a, current_worker) <=> b.fit_rate(b,current_worker)}.reverse %>
+            <%@jobs1.each do |job| %>
+                <%if job.fit_rate(job, current_worker) >=80 %>
+                    <div class='card'>
                         <h3><%= job.job_function%></h2>
                         <p> Vacancies: <%=job.vacancies_count%></p>
                         <p> Company:   <%=job.client.name%></p>
                         <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+                        <p><strong>GOOD JOB FOR YOU</strong></p>
                         <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
                     </div>
-            <%end%>
+                <%else%>
+                    <div class='card'>
+                            <h3><%= job.job_function%></h2>
+                            <p> Vacancies: <%=job.vacancies_count%></p>
+                            <p> Company:   <%=job.client.name%></p>
+                            <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+                            <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+                        </div>
+                <%end%>
             <%end%>
         </div>
         <%else%>
