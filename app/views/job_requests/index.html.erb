@@ -13,6 +13,19 @@
         <%if current_client%>
             <p><%= link_to 'Create a new Job Request', new_job_request_path %></p>
         <%end%>
+        <%if current_worker%>
+        <div class='cards'>
+            <%@jobs.each do |job| %>
+                <div class='card'>
+                    <h3><%= job.job_function%></h2>
+                    <p> Vacancies: <%=job.vacancies_count%></p>
+                    <p> Company:   <%=job.client.name%></p>
+                    <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+                    <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+                </div>
+            <%end%>
+        </div>
+        <%else%>
         <div class='cards'>
             <%@jobs.each do |job| %>
                 <div class='card'>
@@ -32,3 +45,5 @@
         </div>
     <%end%>
 </div>
+<%end%>
+

@@ -1,4 +1,5 @@
 class JobRequest < ApplicationRecord
+    attr_accessor :fit_ratio
     belongs_to :client
     has_many :candidacies, dependent: :destroy
     has_many :workers, through: :candidacies
@@ -14,6 +15,24 @@ class JobRequest < ApplicationRecord
     def applied?(worker)
         workers.include?(worker)
     end
+
+    def fit_rate (job, worker)
+    counter = 0.0
+    skills_worker = worker.skills
+    skills_job = job.skills
+    skills_worker.each do |skill|
+        if skills_job.include?(skill)
+            counter+=1
+            
+        end
+    end
+    final_counter= (counter/skills_job.count)*100
+    
+    
+        
+    end
+
+
 
     private
         def end_date_is_after_start_date
