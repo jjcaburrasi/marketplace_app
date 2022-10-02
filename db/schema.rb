@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_10_02_103742) do
   create_table "candidacies", force: :cascade do |t|
     t.bigint "worker_id", null: false
     t.bigint "job_request_id", null: false
-    t.string "status", default: "Application Submitted"
+    t.string "status", default: "Application submitted"
     t.date "start_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

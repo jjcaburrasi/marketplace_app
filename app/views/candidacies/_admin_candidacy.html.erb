@@ -1,74 +1,78 @@
 <% provide(:button_text, 'Change status') %>
 <div class='container'>
-    <h1> Worker Candidacies </h1>
-    <div class= 'row'>
-        <div class= 'col-lg-3'>
-            <h3> Application submitted </h3>
-            <% @candidacies_0.each do |candidacy| %>
-                <div class="card-app">
-                    <div class="card-header">
-                        <span><%= candidacy.job_request.job_function %></span>
+    <% if @candidacies.any? %>
+        <h1> Worker Candidacies </h1>
+        <div class= 'row'>
+            <div class= 'col-lg-3'>
+                <h3> Application submitted </h3>
+                <% @candidacies_0.each do |candidacy| %>
+                    <div class="card-app">
+                        <div class="card-header">
+                            <span><%= candidacy.job_request.job_function %></span>
+                        </div>
+                        <br>
+                        <span> Worker: <%= candidacy.worker.name %></span>
+                        <br>
+                        <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
+                                <%= f.select :status, ['Application ', 'Interview', 'Hired','Rejected']%><br/>
+                                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                        <% end %>
                     </div>
-                    <br>
-                    <span> Worker: <%= candidacy.worker.name %></span>
-                    <br>
-                    <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
-                            <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
-                            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-                    <% end %>
-                </div>
-            <%end%>
-        </div>
-        <div class= 'col-lg-3'>
-            <h3> Interview </h3>
-                <% @candidacies_1.each do |candidacy| %>
-                <div class="card-app">
-                    <div class="card-header">
-                        <span><%= candidacy.job_request.job_function %></span>
+                <%end%>
+            </div>
+            <div class= 'col-lg-3'>
+                <h3> Interview </h3>
+                    <% @candidacies_1.each do |candidacy| %>
+                    <div class="card-app">
+                        <div class="card-header">
+                            <span><%= candidacy.job_request.job_function %></span>
+                        </div>
+                        <br>
+                        <span> Worker: <%= candidacy.worker.name %></span>
+                        <br>
+                        <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
+                                <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
+                                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                        <% end %>
                     </div>
-                    <br>
-                    <span> Worker: <%= candidacy.worker.name %></span>
-                    <br>
-                    <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
-                            <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
-                            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-                    <% end %>
-                </div>
-            <%end%>
-        </div>
-        <div class= 'col-lg-3'>
-            <h3> Hired</h3>
-            <% @candidacies_2.each do |candidacy| %>
-                <div class="card-app">
-                    <div class="card-header">
-                        <span><%= candidacy.job_request.job_function %></span>
+                <%end%>
+            </div>
+            <div class= 'col-lg-3'>
+                <h3> Hired</h3>
+                <% @candidacies_2.each do |candidacy| %>
+                    <div class="card-app">
+                        <div class="card-header">
+                            <span><%= candidacy.job_request.job_function %></span>
+                        </div>
+                        <br>
+                        <span> Worker: <%= candidacy.worker.name %></span>
+                        <br>
+                        <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
+                                <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
+                                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                        <% end %>
                     </div>
-                    <br>
-                    <span> Worker: <%= candidacy.worker.name %></span>
-                    <br>
-                    <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
-                            <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
-                            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-                    <% end %>
-                </div>
-            <%end%>
-        </div>
-        <div class= 'col-lg-3'>
-            <h3> Rejected </h3>
-            <% @candidacies_3.each do |candidacy| %>
-                <div class="card-app">
-                    <div class="card-header">
-                        <span><%= candidacy.job_request.job_function %></span>
+                <%end%>
+            </div>
+            <div class= 'col-lg-3'>
+                <h3> Rejected </h3>
+                <% @candidacies_3.each do |candidacy| %>
+                    <div class="card-app">
+                        <div class="card-header">
+                            <span><%= candidacy.job_request.job_function %></span>
+                        </div>
+                        <br>
+                        <span> Worker: <%= candidacy.worker.name %></span>
+                        <br>
+                        <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
+                                <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
+                                <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+                        <% end %>
                     </div>
-                    <br>
-                    <span> Worker: <%= candidacy.worker.name %></span>
-                    <br>
-                    <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
-                            <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
-                            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-                    <% end %>
-                </div>
-            <%end%>
+                <%end%>
+            </div>
         </div>
-    </div>
+    <% else %> 
+    <h1> Currently, there is no candidacies for this Job Request </h1>
+    <% end %>
 </div>

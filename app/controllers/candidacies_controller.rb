@@ -38,8 +38,8 @@ class CandidaciesController < ApplicationController
     end
 
     def index
-        @candidacies = Candidacy.all
-        @candidacies_0 = Candidacy.where(status: 'Application Submitted').where(job_request_id: params[:job_request_id])
+        @candidacies = Candidacy.where(job_request_id: params[:job_request_id])
+        @candidacies_0 = Candidacy.where(status: 'Application submitted').where(job_request_id: params[:job_request_id])
         @candidacies_1 = Candidacy.where(status: 'Interview').where(job_request_id: params[:job_request_id])
         @candidacies_2 = Candidacy.where(status: 'Hired').where(job_request_id: params[:job_request_id])
         @candidacies_3 = Candidacy.where(status: 'Rejected').where(job_request_id: params[:job_request_id])
@@ -53,7 +53,8 @@ class CandidaciesController < ApplicationController
         @candidacy = Candidacy.find(params[:id])
         @job = @candidacy.job_request
         if @candidacy.update(candidacy_params)
-            redirect_to candidacies_path, notice: "Status updated."
+            flash[:info] = "Status updated"
+            redirect_to job_request_candidacies_path(@job)
         end
         if @candidacy.status == 'Hired'
             @candidacy.worker.update(working:true)
