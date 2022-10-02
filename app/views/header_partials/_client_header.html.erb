@@ -3,7 +3,7 @@
     <%= link_to 'MARKETPLACE-CLIENTS', root_path, id: "logo"%>
     <nav>
       <ul class="nav navbar-nav navbar-right"> 
-        <li class='job'><%= link_to "My Workers", "#" %></li>
+        <li class='job'><%= link_to "My Workers", client_myworkers_path(current_client)%></li>
         <li class='job'><%= link_to "Available Workers", workers_path %></li> 
         <li class='job'><%= link_to "My Job Requests", job_requests_path %></li> 
         <li class='job'><%= link_to "Candidacies", candidacies_path %></li> 

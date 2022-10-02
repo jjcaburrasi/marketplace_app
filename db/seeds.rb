@@ -21,9 +21,10 @@ client= Client.create!(name:"client",
     rnd_necessary_number_skills = rand(1..2)
     rnd_skills = skills.shuffle[1..rnd_number_skills]
     rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
-JobRequest.create!(client: client, job_function:Faker::Job.title, 
+job = JobRequest.new(client: client, job_function:Faker::Job.title, 
     address: Faker::Address.city, monthly_salary: 1000, skills: rnd_skills, skills_necessary: rnd_necessary_skills,
     start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
+    job.save(validate: false)
 }
 
 Admin.create!(email: "a@a.com", password:"123456")
@@ -61,10 +62,11 @@ end
         rnd_necessary_number_skills = rand(1..2)
         rnd_skills = skills.shuffle[1..rnd_number_skills]
         rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
-        JobRequest.create!(client: client, job_function:Faker::Job.title, 
+        job=JobRequest.new(client: client, job_function:Faker::Job.title, 
             address: Faker::Address.city, monthly_salary: rnd_monthly_salary, skills: rnd_skills, 
             skills_necessary: rnd_necessary_skills,
             start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
+        job.save(validate:false)
     end
 end
 
@@ -87,20 +89,21 @@ end
 #4 finished
 4.times do |n|
 
-Placement.create!(client_id: n+2, worker_id: n+2, 
-                                candidacy_id: n+2, start_date: "20/08/2022", end_date: "31/08/2022", 
+
+Placement.create!(client_id: 1, worker_id: n+1, 
+                                candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2022", 
                                 monthly_salary: 1000, created_at: nil, updated_at: nil, 
-                                job_request_id:n+2)
+                                job_request_id:n+1)
 end
 
 #4 current 
 
 4.times do |n|
 
-Placement.create!(client_id: n+3, worker_id: n+3, 
-                                candidacy_id: n+3, start_date: "20/08/2022", end_date: "31/08/2023", 
+Placement.create!(client_id: 1, worker_id: n+1, 
+                                candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2023", 
                                 monthly_salary: 1000, created_at: nil, updated_at: nil, 
-                                job_request_id:n+3)
+                                job_request_id:n+1)
 
 
 end

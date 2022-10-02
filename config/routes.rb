@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     get '/suggestedworkers', to: 'workers#suggested_workers'
   end
   resources :workers
-  resources :clients
+  resources :clients do
+    get 'myworkers', to: 'clients#myworkers'
+  end
   resources :admins
   resources :candidacies, only: [:index]
   resources :placements

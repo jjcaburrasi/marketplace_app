@@ -1,0 +1,24 @@
+<div class='container'>
+    <h2> My Workers </h2>
+    <div class='row'>
+        <div class='col-lg-6 placement-index'>
+            <h3>Present Workers</h3>
+            <%@present_client_placement.each do |placement|%>
+                <div class='placement-card'>
+                    Name:<p><%=placement.worker.name%></p>
+                    <%= link_to 'More Information', worker_path(placement.worker_id) %>
+                </div>
+            <%end%>
+        </div>
+        <div class='col-lg-6 placement-index'>
+           <h3>Past workers</h3>
+           <%@past_client_placement.each do |placement|%>
+                <div class='placement-card'>
+                    Name:<p><%=placement.worker.name%></p>
+                    <%= link_to 'More Information', worker_path(placement.worker_id) %><br>
+                    <%= link_to 'Rate this worker', "#" %>
+                </div>
+            <%end%>
+        </div>
+    </div>
+</div>
