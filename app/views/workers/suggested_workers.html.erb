@@ -1,7 +1,7 @@
 <h2> Suggested workers for <%=@job.job_function%></h2>
 <div class='cards'>
     <% @workers.each do |worker| %>
-        <% if worker.available? %>
+        <% if worker.available? && worker.fit_rate(@job,worker) != 0%>
             <div class='card'>
                 <%= link_to worker.name, worker_path(worker) %>   
                 <p>Fit rate: <%= worker.fit_rate(@job, worker) %><p>

@@ -16,14 +16,11 @@ client= Client.create!(name:"client",
 
 #Generate a pair of JobRequest to example client
 
-rnd_number_skills = rand(1..5)
-rnd_skills = skills.shuffle[1..rnd_number_skills]
-rnd_necessary_skills= skills.shuffle[1..rnd_number_skills]
-
 4.times {
-rnd_number_skills = rand(1..5)
-rnd_skills = skills.shuffle[1..rnd_number_skills]
-rnd_necessary_skills= skills.shuffle[1..rnd_number_skills]
+    rnd_number_skills = rand(1..5)
+    rnd_necessary_number_skills = rand(1..2)
+    rnd_skills = skills.shuffle[1..rnd_number_skills]
+    rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
 JobRequest.create!(client: client, job_function:Faker::Job.title, 
     address: Faker::Address.city, monthly_salary: 1000, skills: rnd_skills, skills_necessary: rnd_necessary_skills,
     start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
@@ -56,13 +53,14 @@ end
     password: password,
     )
 
-    #Generate 2 job_request for each client.
+    #Generate 5 job_request for each client.
     rnd_monthly_salary= rand(900..1500)
 
     5.times do
         rnd_number_skills = rand(1..5)
+        rnd_necessary_number_skills = rand(1..2)
         rnd_skills = skills.shuffle[1..rnd_number_skills]
-        rnd_necessary_skills= skills.shuffle[1..rnd_number_skills]
+        rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
         JobRequest.create!(client: client, job_function:Faker::Job.title, 
             address: Faker::Address.city, monthly_salary: rnd_monthly_salary, skills: rnd_skills, 
             skills_necessary: rnd_necessary_skills,

@@ -23,7 +23,7 @@ def fit_rate (job, worker)
   a2= Set.new(skills_must_job)
   compare_skills=a2.subset?(a1)
   if !compare_skills
-      0
+    return 0
   else
       skills_worker.each do |skill|
           if skills_job.include?(skill)

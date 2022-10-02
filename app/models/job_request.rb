@@ -9,7 +9,7 @@ class JobRequest < ApplicationRecord
     validates :job_function, presence: true
     validates :vacancies_count, presence: true
     validates :monthly_salary, presence: true
-    validate :necessary_skills_unique
+    # validate :necessary_skills_unique
     validate :start_date_in_the_past
 
     def applied?(worker)
@@ -29,7 +29,7 @@ class JobRequest < ApplicationRecord
     a2= Set.new(skills_must_job)
     compare_skills=a2.subset?(a1)
     if !compare_skills
-        0
+       return 0
     else
         skills_worker.each do |skill|
             if skills_job.include?(skill)
