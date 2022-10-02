@@ -55,6 +55,7 @@
                         <p><%= link_to 'More information' , job_request_path(job)%></p>
                     <%else%>
                         <p><%= link_to 'More information', job_request_path(job)%></p>
+                        <p><%= link_to 'Manage job', job_request_candidacies_path(job)%></p>
                     <%end%>
                 </div>
             <%end%>

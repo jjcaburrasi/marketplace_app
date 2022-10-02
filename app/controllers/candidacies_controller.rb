@@ -39,10 +39,10 @@ class CandidaciesController < ApplicationController
 
     def index
         @candidacies = Candidacy.all
-        @candidacies_0 = Candidacy.where(status: 'Application Submitted')
-        @candidacies_1 = Candidacy.where(status: 'Interview')
-        @candidacies_2 = Candidacy.where(status: 'Hired')
-        @candidacies_3 = Candidacy.where(status: 'Rejected')
+        @candidacies_0 = Candidacy.where(status: 'Application Submitted').where(job_request_id: params[:job_request_id])
+        @candidacies_1 = Candidacy.where(status: 'Interview').where(job_request_id: params[:job_request_id])
+        @candidacies_2 = Candidacy.where(status: 'Hired').where(job_request_id: params[:job_request_id])
+        @candidacies_3 = Candidacy.where(status: 'Rejected').where(job_request_id: params[:job_request_id])
     end
 
     def edit

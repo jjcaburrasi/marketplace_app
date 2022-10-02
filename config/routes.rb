@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :clients
   devise_for :workers
   resources :job_requests, path:"jobs" do
-    resources :candidacies, only: [:create, :destroy, :update, :edit]
+    resources :candidacies
     get '/suggestedworkers', to: 'workers#suggested_workers'
   end
   resources :workers
