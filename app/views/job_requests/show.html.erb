@@ -23,7 +23,7 @@
         <%end%>
         <% if current_client%>
             <p> Vacancies filled: <%=@job.filled_vacancies%></p>
-            <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , candidacies_path %></p>
+            <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , job_request_candidacies_path(@job) %></p>
             <p><%= link_to 'Edit Job Request' , edit_job_request_path(@job) %></p>
             <p><%= link_to 'Suggested Workers', job_request_suggestedworkers_path(@job)%></p>
         <%end%>

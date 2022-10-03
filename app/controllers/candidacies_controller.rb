@@ -38,7 +38,9 @@ class CandidaciesController < ApplicationController
     end
 
     def index
-        @job = JobRequest.find(params[:job_request_id])
+        if params[:job_request_id]
+            @job = JobRequest.find(params[:job_request_id])
+        end
         @candidacies = Candidacy.where(job_request_id: params[:job_request_id])
         @candidacies_0 = Candidacy.where(status: 'Application submitted').where(job_request_id: params[:job_request_id])
         @candidacies_1 = Candidacy.where(status: 'Interview').where(job_request_id: params[:job_request_id])

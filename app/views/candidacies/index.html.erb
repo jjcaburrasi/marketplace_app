@@ -12,14 +12,12 @@
         <%end%>
 
     <% elsif client_signed_in? %>
-        <h2> Candidacies to my Jobs</h2>
-        <% current_client.job_requests.each do |jobs| %>
-            <% jobs.candidacies.each do |candidacy| %>
-            <h3> Job: <%= jobs.job_function %></h3>
-            <p>Client: <%=jobs.client.name%></p>
+        <h2> Candidacies to <%=@job.job_function%></h2>
+        <% @job.candidacies.each do |candidacy| %>
+            <h3> Job: <%= @job.job_function %></h3>
+            <p>Client: <%=@job.client.name%></p>
             <p><%= link_to candidacy.worker.name, worker_path(candidacy.worker)%></p>
             <p>Status: <%=candidacy.status%></p>
             <%end%>
-        <%end%>
     <%end%>
 </div>

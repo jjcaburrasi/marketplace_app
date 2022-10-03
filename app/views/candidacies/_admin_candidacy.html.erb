@@ -14,7 +14,7 @@
                         <span> Worker: <%= candidacy.worker.name %></span>
                         <br>
                         <%= form_for ([candidacy.job_request, candidacy]) do |f| %>
-                                <%= f.select :status, ['Application ', 'Interview', 'Hired','Rejected']%><br/>
+                                <%= f.select :status, ['Application submitted', 'Interview', 'Hired','Rejected']%><br/>
                                 <%= f.submit yield(:button_text), class: "btn btn-primary" %>
                         <% end %>
                     </div>
