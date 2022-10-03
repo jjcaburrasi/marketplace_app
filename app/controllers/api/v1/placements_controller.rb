@@ -2,8 +2,8 @@ module Api
     module V1
       class PlacementsController < ActionController::Base
         def index
-            @placements = Placement.all
-            render json: @placements
+            @placements_done = Placement.where("end_date < ?", Date.today)
+            render json: @placements_done
         end
         # before_action :check_basic_auth
         # skip_before_action :verify_authenticity_token
