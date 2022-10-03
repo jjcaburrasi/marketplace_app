@@ -1,8 +1,9 @@
 class JobRequestsController < ApplicationController
     before_action :authorized?, except: [:index]
     before_action :can_create?, only: [:new, :create]
-    before_action :can_update?, only: [:edit, :update]
+    # before_action :can_update?, only: [:edit, :update]
     before_action :downcase, only: [:search_jobs]
+    attr_accessor :filled_vacancies, :vacancies_count
     include ApplicationHelper
     def index
         @jobs = which_jobs
@@ -72,12 +73,12 @@ class JobRequestsController < ApplicationController
         end
 
         def can_update?
-            return unless !current_client
+            return unless current_worker
             redirect to job_requests_path
         end
 
         def jobrequest_params
-            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, skills:[],skills_necessary: [])
+            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, filled_vacancies, skills:[],skills_necessary: [])
         end
 
         def skills

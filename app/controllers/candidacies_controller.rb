@@ -63,7 +63,9 @@ class CandidaciesController < ApplicationController
         end
         if @candidacy.status == 'Hired'
             @candidacy.worker.update(working:true)
-            @job.update(vacancies_count: @job.vacancies_count-1, filled_vacancies: @job.filled_vacancies+1)
+            @candidacy.worker.update(available:false)
+            @job.update(vacancies_count: @job.vacancies_count - 1) 
+            @job.update(filled_vacancies: @job.filled_vacancies + 1)
             Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
             change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
         end

@@ -7,7 +7,7 @@
         <p>Start date: <%=@placement.start_date%></p>
         <p>End Date: <%=@placement.end_date%></p>
         <p>Monthly Salary: <%=@placement.monthly_salary%></p>
-        <%if current_admin %>
+        <%if current_admin && @placement.end_date > Date.today%>
             <p> Extend engagement </p>
             <%= form_for (@placement) do |f| %>
                 <%= f.label :end_date %><br>

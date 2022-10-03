@@ -40,11 +40,20 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-
-  <div class="field">
-      <%= f.check_box :available %>
-      <%= f.label :Available? %>
+  <% if current_worker %>
+    <% if current_worker.working == false %>
+      <div class="field">
+          <%= f.check_box :available %>
+          <%= f.label :Available? %>
+      </div>
+    <%end%>
+  <%end%>
+  <% if current_admin %>
+      <div class="field">
+        <%= f.check_box :available %>
+        <%= f.label :Available? %>
     </div>
+  <%end%>
 
   <div class="actions">
     <%= f.submit "Update" %>
