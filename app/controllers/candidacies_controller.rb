@@ -24,6 +24,7 @@ class CandidaciesController < ApplicationController
             else
                 if @candidacy.save
                     flash[:success] = "Application was successfully created."
+                    UserMailer.application_submitted(current_worker, @candidacy).deliver_now
                     redirect_to job_requests_path
                 else
                     flash[:danger] = "Could not be created"
@@ -65,6 +66,10 @@ class CandidaciesController < ApplicationController
             Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
             change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
         end
+        if @candidacy.status == 'Rejected'
+        UserMailer.reject_candidate(@candidacy.worker, @candidacy.job_request).deliver_now
+        end
+
     end
 
     def change_status(candidacies)
