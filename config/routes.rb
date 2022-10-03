@@ -18,5 +18,11 @@ Rails.application.routes.draw do
   resources :admins
   resources :candidacies, only: [:index]
   resources :placements
+
+  namespace :api do
+    namespace :v1 do
+      resources :placements, only: [:index, :show, :create, :destroy]
+    end
+  end
 end
 
