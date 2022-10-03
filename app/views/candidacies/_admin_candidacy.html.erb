@@ -1,7 +1,7 @@
 <% provide(:button_text, 'Change status') %>
 <div class='container'>
     <% if @candidacies.any? %>
-        <h1> Worker Candidacies </h1>
+        <h1> Candidacies for <%=@job.job_function%></h1>
         <div class= 'row'>
             <div class= 'col-lg-3'>
                 <h3> Application submitted </h3>
@@ -73,6 +73,6 @@
             </div>
         </div>
     <% else %> 
-    <h1> Currently, there is no candidacies for this Job Request </h1>
+    <h1> Currently, there is no candidacies for <%=@job.job_function%></h1>
     <% end %>
 </div>
