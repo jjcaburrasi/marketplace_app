@@ -16,10 +16,12 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.change_status.subject
   #
-  def change_status
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def change_status(user, app)
+      @greeting = "Hello #{user.name}"
+      @position = app.job_request.job_function   
+     
+  
+      mail to: user.email
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

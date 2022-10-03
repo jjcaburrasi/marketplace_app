@@ -58,6 +58,7 @@ class CandidaciesController < ApplicationController
         @job = @candidacy.job_request
         if @candidacy.update(candidacy_params)
             flash[:info] = "Status updated"
+            UserMailer.change_status(@candidacy.worker, @candidacy).deliver_now
             redirect_to job_request_candidacies_path(@job)
         end
         if @candidacy.status == 'Hired'
