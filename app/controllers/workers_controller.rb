@@ -4,8 +4,9 @@ class WorkersController < ApplicationController
     end
 
     def index
-        @workers = Worker.all
+        @workers = Worker.where(available:true).where(rehirable: [true, nil])   
     end
+
     def search_workers  
         @workers = Worker.where(skills: params[:skills])
     end
@@ -16,9 +17,16 @@ class WorkersController < ApplicationController
         @workers = @workers.first(6)
     end
 
+    def update
+        @worker = Worker.find(params[:id])
+        if @worker.update(worker_params)
+            redirect_to worker_path(@worker)
+        end
+    end
+
     private
     def worker_params
-        params.require(:worker).permit(:name, :email, :password, :password_confirmation, skills: [])
+        params.require(:worker).permit(:name, :email, :password, :password_confirmation, :rehirable, :working, skills: [])
     end
 
     def fit_rate (job, worker)

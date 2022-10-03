@@ -1,22 +1,35 @@
+<% provide(:button_text, 'Change status') %>
 <div class='container'>
     <div class='show-card'>
         <% if (current_admin || current_client) %>
             <%= link_to 'Back to workers', workers_path%>
         <%end%>
         <div class='worker-card'>
-            Name: <%= @worker.name %><br>
-            E-Mail: <%= @worker.email %><br>
-            Currently status: <%= @worker.working ? "Currently working" : "Currently not working" %><br>
-            Availability status: <%= @worker.available ? "Available" : "Not Available" %><br>
-            Skills:<br>
-            <%@worker.skills.each do |skill| %>
-                <p><%= skill %></p><br>
-                <% end %>
+            <p>Name: <%= @worker.name %></p>
+            <p>E-Mail: <%= @worker.email %></p>
+            <p>Status: <%= @worker.working ? "Currently working" : "Currently not working" %></p>
+            <% if @worker.working %>
+                <%= link_to 'current placement', placement_path(@worker.placements.last) %>
+            <%end%>
+            <p>Availability: <%= @worker.available ? "Available" : "Not Available" %></p>
+            <% if !@worker.skills.empty?%>
+            <p>Skills:<p>
+                <%@worker.skills.each do |skill| %>
+                    <p><%= skill %></p>
+                    <% end %>
+            <%end%>
 
             <%if current_admin %>
-            Rehirable status: <%= !@worker.rehirable ? "Rehirable" : "Not Rehirable" %><br>
-
+            <p>Rehirable status: <%= !@worker.rehirable ? "Rehirable" : "Not Rehirable" %></p>
+                <%= form_for (@worker) do |f| %>
+                    <%= f.label :rehirable %>
+                    <%= f.check_box :rehirable %><br/>
+                    <%= f.submit yield(:button_text), class: "btn btn-primary rehir" %>
+                <% end %>
             <% end %>
+
+            
+            
         </div>
     </div>
 

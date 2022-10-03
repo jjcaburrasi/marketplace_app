@@ -1,6 +1,11 @@
 class PlacementsController < ApplicationController
-    before_action :authorized?, only: [:index]
+    # before_action :authorized?, only: [:index]
     def index
+        if params[:job_request]
+            @job = JobRequest.find(params[:job_request_id])
+            @current_placements = Placement.where(job_request: @job).where("end_date > ?", Date.today)
+            @old_placements = Placement.where(job_request: @job).where("end_date < ?", Date.today)
+        end
         @current_placements = Placement.where("end_date > ?", Date.today)
         @old_placements = Placement.where("end_date < ?", Date.today)
     end
@@ -15,6 +20,7 @@ class PlacementsController < ApplicationController
             redirect_to placement_path(@placement), notice: "Date updated."
         end
     end
+
 
     private
 

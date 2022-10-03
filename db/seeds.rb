@@ -1,6 +1,6 @@
+Placement.delete_all
 Candidacy.delete_all
 JobRequest.delete_all
-Placement.delete_all
 Worker.delete_all
 Client.delete_all
 Admin.delete_all

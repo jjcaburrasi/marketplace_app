@@ -3,21 +3,30 @@
     <% if admin_signed_in? %>
         <%= render 'candidacies/admin_candidacy' %>
     <% elsif worker_signed_in? %>
+        
         <h2> My candidacies </h2>
-        <% current_worker.candidacies.each do |candidacy| %>
-            <h3> Job: <%= candidacy.job_request.job_function %></h3>
-            <p>Client: <%=candidacy.job_request.client.name%></p>
-            <p>Worker: <%=candidacy.worker.name%></p>
-            <p>Status: <%=candidacy.status%></p>
-        <%end%>
+            <div class='cards'>
+                <% current_worker.candidacies.each do |candidacy| %>
+                    <div class='card' >
+                        <h3> Job: <%= link_to candidacy.job_request.job_function, job_request_path(candidacy.job_request) %></h3>
+                        <p>Client: <%=candidacy.job_request.client.name%></p>
+                        <p>Worker: <%=candidacy.worker.name%></p>
+                        <p>Status: <%=candidacy.status%></p>
+                    </div>
+                <%end%>
+            </div>
 
     <% elsif client_signed_in? %>
         <h2> Candidacies to <%=@job.job_function%></h2>
-        <% @job.candidacies.each do |candidacy| %>
-            <h3> Job: <%= @job.job_function %></h3>
-            <p>Client: <%=@job.client.name%></p>
-            <p><%= link_to candidacy.worker.name, worker_path(candidacy.worker)%></p>
-            <p>Status: <%=candidacy.status%></p>
-            <%end%>
+        <div class='cards'>
+            <div class='card'>
+                <% @job.candidacies.each do |candidacy| %>
+                    <h3> Job: <%= @job.job_function %></h3>
+                    <p>Client: <%=@job.client.name%></p>
+                    <p><%= link_to candidacy.worker.name, worker_path(candidacy.worker)%></p>
+                    <p>Status: <%=candidacy.status%></p>
+                <%end%>
+            </div>
+        </div>
     <%end%>
 </div>

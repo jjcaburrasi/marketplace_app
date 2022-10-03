@@ -4,12 +4,16 @@
     <div class='show-card'>
         <h3><%= @job.job_function%></h3>
         <p> Vacancies: <%=@job.vacancies_count%></p>
-        <p> Necessary Skills:   <%@job.skills_necessary.each do |skill| %>
-                                <%= skill %><br>
-                                <% end %></p>
-        <p> Desirable Skills:   <%@job.skills.each do |skill| %>
-                                <%= skill %><br>
-                                <% end %></p>
+        <%if !@job.skills_necessary.empty? %>
+            <p> Necessary Skills:   <%@job.skills_necessary.each do |skill| %>
+                                    <%= skill %><br>
+                                    <% end %></p>
+        <%end%>
+        <%if !@job.skills.empty? %>
+            <p> Desirable Skills:   <%@job.skills.each do |skill| %>
+                                    <%= skill %><br>
+                                    <% end %></p>
+        <%end%>
         <p> Monthly Salary: <%=@job.monthly_salary %> €</p>
         <p> Address: <%=@job.address%></p>
         <% if current_worker %>
@@ -24,8 +28,13 @@
         <% if current_client%>
             <p> Vacancies filled: <%=@job.filled_vacancies%></p>
             <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , job_request_candidacies_path(@job) %></p>
+            <% if @job.filled_vacancies != 0 %> 
+                <p><%= link_to 'Current placements', placements_path(@job)%></p>
+            <%end%>
             <p><%= link_to 'Edit Job Request' , edit_job_request_path(@job) %></p>
-            <p><%= link_to 'Suggested Workers', job_request_suggestedworkers_path(@job)%></p>
+            <% if @job.vacancies_count != 0 %>
+                <p><%= link_to 'Suggested Workers', job_request_suggestedworkers_path(@job)%></p>
+            <%end%>
         <%end%>
     </div>
 </div>
