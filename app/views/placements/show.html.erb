@@ -2,6 +2,7 @@
 <div class='container'>
     <div class='show-card'>
         <p>Job: <%=@placement.job_request.job_function%></p>
+        <p><%= link_to 'See more', job_request_path(@placement.job_request) %></p>
          <p>Company: <%=@placement.client.name%></p>
         <p>Worker: <%=@placement.worker.name%></p>
         <p>Start date: <%=@placement.start_date%></p>
