@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get  '/search_workers', to: 'workers#search_workers'
   get  '/search_jobs',    to: 'job_requests#search_jobs'
+  
   root "static_pages#home"
   devise_for :admins
   devise_for :clients
@@ -9,7 +10,10 @@ Rails.application.routes.draw do
     resources :candidacies
     get '/suggestedworkers', to: 'workers#suggested_workers'
   end
-  resources :workers
+  resources :workers do
+    get  '/inform_worker',   to: 'workers#inform_worker' 
+  end
+
   resources :clients do
     get 'myworkers', to: 'clients#myworkers'
   end

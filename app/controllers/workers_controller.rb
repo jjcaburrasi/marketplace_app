@@ -39,6 +39,13 @@ class WorkersController < ApplicationController
         end
     end
 
+    def inform_worker
+        @worker = Worker.find(params[:worker_id])
+        UserMailer.inform_worker(current_client, @worker).deliver_now
+        flash[:info]="Email was sent"
+        redirect_to worker_path(@worker)
+    end
+
     private
     def worker_params
         params.require(:worker).permit(:name, :email, :password, :password_confirmation, :rehirable, :working, skills: [])

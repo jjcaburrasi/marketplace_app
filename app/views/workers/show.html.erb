@@ -28,6 +28,10 @@
                 <% end %>
             <% end %>
 
+            <% if current_client %>
+             <%= link_to 'Send opportunity to worker', worker_inform_worker_path(@worker.id)%>
+            <%end%>
+
             
             
         </div>

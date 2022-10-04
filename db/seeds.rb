@@ -11,11 +11,11 @@ all_skills= ["Work rotatory turn", "English",
     "Spanish", "Capacity to load heavy weights", "Disability certificate",'Driving License', 'Tech', 'Construction', "Own motorcycle" ]
 
 
-Worker.create!(name:"worker", 
+Worker.create!(name:"John Doe", 
                 email: "w@w.com", password:"123456", skills: ["Driving License"])
 
-client= Client.create!(name:"client", 
-    email: "c@c.com", address:"Address", password:"123456")
+client= Client.create!(name:"Amazon", 
+    email: "c@c.com", address:"Baker St. 221b", password:"123456")
 
 #Generate a pair of JobRequest to example client
 

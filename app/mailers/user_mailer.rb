@@ -34,4 +34,11 @@ class UserMailer < ApplicationMailer
       @position = job.job_function
       mail to: user.email
   end
+
+  def inform_worker(client, worker)
+      @greeting = "Hello #{worker.name}"
+      @company = client.name
+      mail to: worker.email
+
+  end
 end
