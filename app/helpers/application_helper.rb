@@ -16,11 +16,11 @@ module ApplicationHelper
 
   def which_jobs
     if worker_signed_in? || admin_signed_in?
-      @jobs = JobRequest.where.not(vacancies_count: 0)
+      @jobs = JobRequest.where.not(vacancies_count: 0).where("end_date > ?", Date.today)
     elsif client_signed_in?
       @jobs = JobRequest.where(client: current_client)
     else
-      @jobs = JobRequest.where.not(vacancies_count: 0)
+      @jobs = JobRequest.where.not(vacancies_count: 0).where("end_date > ?", Date.today)
     end
     return @jobs
   end
