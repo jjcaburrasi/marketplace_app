@@ -3,13 +3,14 @@ class PlacementsController < ApplicationController
     before_action :authorized?, only: [:index]
 
     def index
-        if params[:job_request]
+        if params[:job_request_id]
             @job = JobRequest.find(params[:job_request_id])
             @current_placements = Placement.where(job_request: @job).where("end_date > ?", Date.today)
             @old_placements = Placement.where(job_request: @job).where("end_date < ?", Date.today)
+        else
+            @current_placements = Placement.where("end_date > ?", Date.today)
+            @old_placements = Placement.where("end_date < ?", Date.today)
         end
-        @current_placements = Placement.where("end_date > ?", Date.today)
-        @old_placements = Placement.where("end_date < ?", Date.today)
     end
 
     def show
@@ -31,7 +32,7 @@ class PlacementsController < ApplicationController
     end
 
     def authorized?
-        return unless !current_admin
+        return unless current_worker
         redirect_to root_path, alert: 'Page not found'
     end
 

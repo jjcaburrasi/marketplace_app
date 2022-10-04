@@ -4,7 +4,11 @@ class WorkersController < ApplicationController
     end
 
     def index
-        @workers = Worker.where(available:true).where(rehirable: [true, nil])   
+        if !current_admin
+            @workers = Worker.where(available:true).where(rehirable: [true, nil]) 
+        elsif
+            @workers = Worker.all  
+        end
     end
 
     def search_workers  
@@ -28,7 +32,7 @@ class WorkersController < ApplicationController
 
     def suggested_workers
         @job = JobRequest.find(params[:job_request_id])
-        @workers = Worker.all.sort { |a,b| fit_rate(@job, a) <=> fit_rate(@job, b)}.reverse
+        @workers = Worker.where(working: false).where(available:true).sort { |a,b| fit_rate(@job, a) <=> fit_rate(@job, b)}.reverse
         @workers = @workers.first(6)
     end
 
