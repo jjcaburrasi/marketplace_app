@@ -10,31 +10,8 @@ class CandidaciesController < ApplicationController
 
     def create
         @job = JobRequest.find(params[:job_request_id])
-        @candidacy = Candidacy.new
-        @candidacy.worker = current_worker
-        @candidacy.job_request = @job
-        @candidacy.start_date = @job.start_date
-        if !current_worker.working?
-            a1= Set.new(current_worker.skills)
-            a2= Set.new(@job.skills_necessary)
-            compare_skills=a2.subset?(a1)
-            if !compare_skills
-                flash[:danger] = "You don't have the required skills"
-                redirect_to job_request_path(@job)
-            else
-                if @candidacy.save
-                    flash[:success] = "Application was successfully created."
-                    UserMailer.application_submitted(current_worker, @candidacy).deliver_now
-                    redirect_to job_requests_path
-                else
-                    flash[:danger] = "Could not be created"
-                    redirect_to job_request_path(@job)
-                end
-            end
-        else
-            flash[:danger] = "You are already working, you can not apply to a job"
+        if CreateCandidacy.call(@job, current_worker, flash)
             redirect_to job_request_path(@job)
-           
         end
     end
 
@@ -55,32 +32,14 @@ class CandidaciesController < ApplicationController
 
     def update
         @candidacy = Candidacy.find(params[:id])
-        @job = @candidacy.job_request
-        if @candidacy.update(candidacy_params)
+         if  UpdateCandidacy.call(@candidacy, candidacy_params)
+            redirect_to job_request_candidacies_path(@candidacy.job_request)
             flash[:info] = "Status updated"
-            UserMailer.change_status(@candidacy.worker, @candidacy).deliver_now
-            redirect_to job_request_candidacies_path(@job)
-        end
-        if @candidacy.status == 'Hired'
-            @candidacy.worker.update(working:true)
-            @candidacy.worker.update(available:false)
-            @job.update(vacancies_count: @job.vacancies_count - 1) 
-            @job.update(filled_vacancies: @job.filled_vacancies + 1)
-            Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
-            change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
-        end
-        if @candidacy.status == 'Rejected'
-        UserMailer.reject_candidate(@candidacy.worker, @candidacy.job_request).deliver_now
-        end
-
+         else
+            flash[:info] = "No status updated"
+         end
     end
 
-    def change_status(candidacies)
-        candidacies.each do |candidacy|
-            candidacy.update(status: 'Inactive')
-            candidacy.save
-        end
-    end
 
     def destroy
     end
@@ -89,6 +48,7 @@ class CandidaciesController < ApplicationController
     def candidacy_params
       params.require(:candidacy).permit(:status, :start_date)
     end
+
 
     def authorized?
         return unless !current_admin
