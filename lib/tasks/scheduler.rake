@@ -8,6 +8,7 @@ task :check_jobs => :environment do
         placement.worker.working = false
         placement.worker.available = true
     end
+  end
 
 
   puts "ending method_name process"

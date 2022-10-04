@@ -4,8 +4,11 @@ JobRequest.delete_all
 Worker.delete_all
 Client.delete_all
 Admin.delete_all
-skills = ['Driving License', 'Tech', 'Construction', "Own motorcycle", "Work rotatory turn", "English",
+job_necessary_skills = ['Driving License', 'Tech', 'Construction', "Own motorcycle"]
+job_desirable_skills= ["Work rotatory turn", "English",
     "Spanish", "Capacity to load heavy weights", "Disability certificate"]
+all_skills= ["Work rotatory turn", "English",
+    "Spanish", "Capacity to load heavy weights", "Disability certificate",'Driving License', 'Tech', 'Construction', "Own motorcycle" ]
 
 
 Worker.create!(name:"worker", 
@@ -19,8 +22,8 @@ client= Client.create!(name:"client",
 4.times {
     rnd_number_skills = rand(1..5)
     rnd_necessary_number_skills = rand(1..2)
-    rnd_skills = skills.shuffle[1..rnd_number_skills]
-    rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
+    rnd_skills = job_desirable_skills.shuffle[1..rnd_number_skills]
+    rnd_necessary_skills= job_necessary_skills.shuffle[1..rnd_necessary_number_skills]
 job = JobRequest.new(client: client, job_function:Faker::Job.title, 
     address: Faker::Address.city, monthly_salary: 1000, skills: rnd_skills, skills_necessary: rnd_necessary_skills,
     start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
@@ -35,8 +38,8 @@ Admin.create!(email: "a@a.com", password:"123456")
     name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
     password = "password"
-    rnd_number_skills = rand(1..5)
-    rnd_skills = skills.shuffle[1..rnd_number_skills]
+    rnd_number_skills = rand(4..9)
+    rnd_skills = all_skills.shuffle[1..rnd_number_skills]
     Worker.create!(name:  name,
     email: email,
     password:              password,
@@ -60,8 +63,8 @@ end
     5.times do
         rnd_number_skills = rand(1..5)
         rnd_necessary_number_skills = rand(1..2)
-        rnd_skills = skills.shuffle[1..rnd_number_skills]
-        rnd_necessary_skills= skills.shuffle[1..rnd_necessary_number_skills]
+        rnd_skills = job_desirable_skills.shuffle[1..rnd_number_skills]
+        rnd_necessary_skills= job_necessary_skills.shuffle[1..rnd_necessary_number_skills]
         job=JobRequest.new(client: client, job_function:Faker::Job.title, 
             address: Faker::Address.city, monthly_salary: rnd_monthly_salary, skills: rnd_skills, 
             skills_necessary: rnd_necessary_skills,
@@ -74,13 +77,15 @@ end
 workers = Worker.all
 jobs = JobRequest.all
 rnd_job = rand(1..JobRequest.count)
-
 workers.each do |worker|
-    2.times {
+jobs_selected= []
+    4.times {
         rnd_job = rand(1..JobRequest.count)
-        job = JobRequest.find(rnd_job)
-        Candidacy.create!(worker: worker, job_request: job)
-
+        if !jobs_selected.include?(rnd_job)
+            job = JobRequest.find(rnd_job)
+            Candidacy.create!(worker: worker, job_request: job)
+            jobs_selected << rnd_job
+        end
     }
     
 end

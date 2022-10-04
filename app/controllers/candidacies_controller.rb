@@ -1,8 +1,6 @@
 class CandidaciesController < ApplicationController
-    # before_action :authorized?, only: [:index]
-    # JobRequest.all.each do |job|
-    #     irb(main):007:1*   pp  job.skills.intersection(skills).size
-    #     irb(main):008:0> end
+    before_action :authorized?, only: [:index]
+   
 
     def new
         @candidacy = Candidacy.new
@@ -51,7 +49,10 @@ class CandidaciesController < ApplicationController
 
 
     def authorized?
-        return unless !current_admin
+        if current_admin || current_worker
+            return
+        else
         redirect_to root_path, alert: 'Page not found'
+        end
     end
 end

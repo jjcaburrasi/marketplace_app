@@ -10,9 +10,7 @@
         <a href class="dropdown-toggle" data-toggle="dropdown"> Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li class="divider"></li>
-            <li><%= link_to "Profile", current_admin %> </li>
             <li><%= button_to "Log out", destroy_admin_session_path, method: :delete %> </li>
-            <li><%= link_to "Edit profile", edit_admin_registration_path %> </li>
          </ul>    
     </nav>
   </div>

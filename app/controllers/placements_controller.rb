@@ -1,5 +1,7 @@
 class PlacementsController < ApplicationController
-    # before_action :authorized?, only: [:index]
+    
+    before_action :authorized?, only: [:index]
+
     def index
         if params[:job_request]
             @job = JobRequest.find(params[:job_request_id])

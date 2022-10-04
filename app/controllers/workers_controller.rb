@@ -8,7 +8,22 @@ class WorkersController < ApplicationController
     end
 
     def search_workers  
-        @workers = Worker.where(skills: params[:skills])
+        all_workers = Worker.where(available: true)
+        @workers=[]
+        all_workers.each do |worker|       
+            skills_worker = worker.skills
+            skills_search = params[:skills]
+            a1= Set.new(skills_worker)
+            a2= Set.new(skills_search)
+            compare_skills=a2.subset?(a1)
+            if compare_skills
+                p "WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+                p worker
+                @workers << worker
+                p @workers
+            end
+        end
+        @workers
     end
 
     def suggested_workers
