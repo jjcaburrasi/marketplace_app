@@ -2,8 +2,10 @@ class ApplicationController < ActionController::Base
 
     before_action :configure_permitted_parameters, if: :devise_controller?
 
-    def home
-    end
+    def someone_signed_in?
+        worker_signed_in? || admin_signed_in? || client_signed_in?
+      end
+
 
    
     protected

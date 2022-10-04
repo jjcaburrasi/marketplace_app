@@ -9,7 +9,7 @@
                 <%worker.skills.each do |skill| %>
                     <p><%= skill %></p><br>
                 <% end %>
-                <%= link_to 'Send job notice', '#'%>
+                <%= link_to 'Send job notice', worker_inform_worker_path(worker.id)%>
 
             </div>
         <%end%>

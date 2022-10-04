@@ -28,7 +28,7 @@
                 <% end %>
             <% end %>
 
-            <% if current_client %>
+            <% if current_client && !@worker.working%>
              <%= link_to 'Send opportunity to worker', worker_inform_worker_path(@worker.id)%>
             <%end%>
 

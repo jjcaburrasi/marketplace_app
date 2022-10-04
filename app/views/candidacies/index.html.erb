@@ -19,12 +19,13 @@
     <% elsif client_signed_in? %>
         <h2> Candidacies to <%=@job.job_function%></h2>
         <div class='cards'>
-            <div class='card'>
-                <% @job.candidacies.each do |candidacy| %>
+            <% @job.candidacies.each do |candidacy| %>
+                <div class='card'>
                     <h3> Job: <%= @job.job_function %></h3>
                     <p>Client: <%=@job.client.name%></p>
                     <p><%= link_to candidacy.worker.name, worker_path(candidacy.worker)%></p>
                     <p>Status: <%=candidacy.status%></p>
+                </div>
                 <%end%>
             </div>
         </div>

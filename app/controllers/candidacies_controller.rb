@@ -1,5 +1,5 @@
 class CandidaciesController < ApplicationController
-    before_action :authorized?, only: [:index]
+    # before_action :authorized?, only: [:index]
    
 
     def new
@@ -49,10 +49,7 @@ class CandidaciesController < ApplicationController
 
 
     def authorized?
-        if current_admin || current_worker
-            return
-        else
+        return unless !someone_signed_in?
         redirect_to root_path, alert: 'Page not found'
-        end
     end
 end
