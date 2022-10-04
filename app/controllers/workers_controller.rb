@@ -47,7 +47,7 @@ class WorkersController < ApplicationController
         @worker = Worker.find(params[:worker_id])
         UserMailer.inform_worker(current_client, @worker).deliver_now
         flash[:info]="Email was sent"
-        redirect_to worker_path(@worker)
+        redirect_to request.referrer
     end
 
     private

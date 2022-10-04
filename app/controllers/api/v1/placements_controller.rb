@@ -2,8 +2,13 @@ module Api
     module V1
       class PlacementsController < ActionController::Base
         def index
+          if params[:parameter] == "12345"
             @placements_done = Placement.where("end_date < ?", Date.today)
             render json: @placements_done
+          else
+            render "api/index"
+          end
+          
         end
         # before_action :check_basic_auth
         # skip_before_action :verify_authenticity_token
