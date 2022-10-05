@@ -7,7 +7,7 @@ module Api
           p params[:token]
           if params[:token] == api_user.token
             @placements_done = Placement.where("end_date < ?", Date.today)
-            render json: @placements_done
+            render json: @placements_done.to_json(include: [:client, :job_request])
           else
             render "api/index"
           end
