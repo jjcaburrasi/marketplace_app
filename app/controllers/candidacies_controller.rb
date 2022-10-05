@@ -18,6 +18,9 @@ class CandidaciesController < ApplicationController
             @job = JobRequest.find(params[:job_request_id])
         end
         @candidacies = Candidacy.where(job_request_id: params[:job_request_id])
+        if current_admin
+            @candidacies.mark_as_read! :all, for: current_admin
+        end
         @candidacies_0 = Candidacy.where(status: 'Application submitted').where(job_request_id: params[:job_request_id])
         @candidacies_1 = Candidacy.where(status: 'Interview').where(job_request_id: params[:job_request_id])
         @candidacies_2 = Candidacy.where(status: 'Hired').where(job_request_id: params[:job_request_id])

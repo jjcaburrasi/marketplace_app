@@ -52,10 +52,22 @@
                 <%end%>
             </div>    
         <%elsif current_admin %>
+            
             <div class='cards'>
                 <%@jobs2 = @jobs.sort { |a,b| a.business_importance(a.client) <=> b.business_importance(b.client)}.reverse %>
                 <%@jobs2.each do |job| %>
                     <div class='card'>
+                        <%if job.candidacies.unread_by(current_admin).any?%>
+                            <span class="badge" style="
+                                position: relative;
+                                top: -1.5em;
+                                right: 13px;
+                                padding: 4px 8px;
+                                border-radius: 100%;
+                                background: #ff8e0d;
+                                color: white;
+                            ">New</span>
+                        <%end%>
                         <h3><%= job.job_function%></h2>
                         <p> Vacancies: <%=job.vacancies_count%></p>
                         <p> Placements: <%=job.filled_vacancies%></p>
@@ -63,6 +75,7 @@
                         <p>Fill rate: <%= job.fill_rate(job) %>%</p>
                         <p><%= link_to 'More information', job_request_path(job)%></p>
                         <p><%= link_to 'Manage job', job_request_candidacies_path(job)%></p>
+                        
                     </div>
                 <%end%>
             </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_090902) do
+ActiveRecord::Schema.define(version: 2022_10_05_125434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,17 @@ ActiveRecord::Schema.define(version: 2022_10_05_090902) do
     t.index ["client_id"], name: "index_placements_on_client_id"
     t.index ["job_request_id"], name: "index_placements_on_job_request_id"
     t.index ["worker_id"], name: "index_placements_on_worker_id"
+  end
+
+  create_table "read_marks", id: :serial, force: :cascade do |t|
+    t.string "readable_type", null: false
+    t.integer "readable_id"
+    t.string "reader_type", null: false
+    t.integer "reader_id"
+    t.datetime "timestamp"
+    t.index ["readable_type", "readable_id"], name: "index_read_marks_on_readable_type_and_readable_id"
+    t.index ["reader_id", "reader_type", "readable_type", "readable_id"], name: "read_marks_reader_readable_index", unique: true
+    t.index ["reader_type", "reader_id"], name: "index_read_marks_on_reader_type_and_reader_id"
   end
 
   create_table "workers", force: :cascade do |t|
