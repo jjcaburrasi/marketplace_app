@@ -1,8 +1,11 @@
 module Api
     module V1
-      class PlacementsController < ActionController::Base
+      class ReportsController < ActionController::Base
         def index
-          if params[:parameter] == "12345"
+          api_user = ApiUser.find_by(api_user: params[:api_user])
+          p api_user.token
+          p params[:token]
+          if params[:token] == api_user.token
             @placements_done = Placement.where("end_date < ?", Date.today)
             render json: @placements_done
           else

@@ -4,6 +4,8 @@ JobRequest.delete_all
 Worker.delete_all
 Client.delete_all
 Admin.delete_all
+
+ApiUser.create!(api_user: "Reporting_app", token: "H2SO4plusNaOHequalNaSO4plusH2O")
 job_necessary_skills = ['Driving License', 'Tech', 'Construction', "Own motorcycle"]
 job_desirable_skills= ["Work rotatory turn", "English",
     "Spanish", "Capacity to load heavy weights", "Disability certificate"]
