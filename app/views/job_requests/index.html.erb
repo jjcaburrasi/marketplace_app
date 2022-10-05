@@ -10,57 +10,71 @@
     <%end%>
 
     <% if !@jobs.nil? %>
-        <%if current_client%>
-            <p><%= link_to 'Create a new Job Request', new_job_request_path %></p>
-        <%end%>
         <%if current_worker%>
             <%= form_with url: "/search_jobs", method: :get do |form| %>
             <%= form.text_field :content, placeholder: "Search job..." %>
             <%= form.submit "Search", class: "btn btn-primary" %>
             <% end %>
-        <div class='cards'>
-            <%@jobs1 = @jobs.sort { |a,b| a.fit_rate(a, current_worker) <=> b.fit_rate(b,current_worker)}.reverse %>
-            <%@jobs1.each do |job| %>
-                <%if job.fit_rate(job, current_worker) >=80 %>
-                    <div class='card'>
-                        <h3><%= job.job_function%></h2>
-                        <p> Vacancies: <%=job.vacancies_count%></p>
-                        <p> Company:   <%=job.client.name%></p>
-                        <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
-                        <p><strong>GOOD JOB FOR YOU</strong></p>
-                        <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
-                    </div>
-                <%else%>
-                    <div class='card'>
+            <div class='cards'>
+                <%@jobs1 = @jobs.sort { |a,b| a.fit_rate(a, current_worker) <=> b.fit_rate(b,current_worker)}.reverse %>
+                <%@jobs1.each do |job| %>
+                    <%if job.fit_rate(job, current_worker) >=80 %>
+                        <div class='card'>
+                            <h3><%= job.job_function%></h2>
+                            <p> Vacancies: <%=job.vacancies_count%></p>
+                            <p> Company:   <%=job.client.name%></p>
+                            <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
+                            <p><strong>GOOD JOB FOR YOU</strong></p>
+                            <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
+                        </div>
+                    <%else%>
+                        <div class='card'>
                             <h3><%= job.job_function%></h2>
                             <p> Vacancies: <%=job.vacancies_count%></p>
                             <p> Company:   <%=job.client.name%></p>
                             <p> Fit Rate:   <%=job.fit_rate(job, current_worker)%> %</p>
                             <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
                         </div>
+                    <%end%>
                 <%end%>
-            <%end%>
-        </div>
-        <%else%>
-        <div class='cards'>
-            <%@jobs.each do |job| %>
-                <div class='card'>
-                    <h3><%= job.job_function%></h2>
-                    <p> Vacancies: <%=job.vacancies_count%></p>
-                    <p> Company:   <%=job.client.name%></p>
-                    <%if current_worker%>
-                        <p><%= link_to 'Apply for this job', job_request_path(job)%></p>
-                    <%elsif current_client%>
+            </div>
+        <%elsif current_client%>
+            <p><%= link_to 'Create a new Job Request', new_job_request_path %></p>
+            <div class='cards'>
+                <%@jobs.each do |job| %>
+                    <div class='card'>
+                        <h3><%= job.job_function%></h2>
+                        <p> Vacancies: <%=job.vacancies_count%></p>
+                        <p> Company:   <%=job.client.name%></p>
                         <%= button_to 'delete job', job_request_path(job), data: { confirm: 'Are you sure?' }, :method => :delete%>
                         <p><%= link_to 'More information' , job_request_path(job)%></p>
-                    <%else%>
+                    </div>
+                <%end%>
+            </div>    
+        <%elsif current_admin %>
+            <div class='cards'>
+                <%@jobs2 = @jobs.sort { |a,b| a.business_importance(a.client) <=> b.business_importance(b.client)}.reverse %>
+                <%@jobs2.each do |job| %>
+                    <div class='card'>
+                        <h3><%= job.job_function%></h2>
+                        <p> Vacancies: <%=job.vacancies_count%></p>
+                        <p> Placements: <%=job.filled_vacancies%></p>
+                        <p> Company:   <%=job.client.name%></p>
+                        <p>Fill rate: <%= job.fill_rate(job) %>%</p>
                         <p><%= link_to 'More information', job_request_path(job)%></p>
                         <p><%= link_to 'Manage job', job_request_candidacies_path(job)%></p>
-                    <%end%>
-                </div>
-            <%end%>
-        </div>
+                    </div>
+                <%end%>
+            </div>
+        <%else%>
+            <div class='cards'>
+                <%@jobs.each do |job| %>
+                    <div class='card'>
+                        <h3><%= job.job_function%></h2>
+                        <p> Company:   <%=job.client.name%></p>
+                    </div>
+                <%end%>
+            </div> 
+        <%end%>
     <%end%>
 </div>
-<%end%>
-

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_03_192327) do
+ActiveRecord::Schema.define(version: 2022_10_05_021407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2022_10_03_192327) do
     t.text "skills", default: [], null: false, array: true
     t.integer "filled_vacancies", default: 0, null: false
     t.text "skills_necessary", default: [], null: false, array: true
+    t.string "category"
     t.index ["client_id"], name: "index_job_requests_on_client_id"
   end
 
@@ -110,18 +111,6 @@ ActiveRecord::Schema.define(version: 2022_10_03_192327) do
     t.index ["client_id"], name: "index_placements_on_client_id"
     t.index ["job_request_id"], name: "index_placements_on_job_request_id"
     t.index ["worker_id"], name: "index_placements_on_worker_id"
-  end
-
-  create_table "ratings", force: :cascade do |t|
-    t.bigint "client_id", null: false
-    t.bigint "worker_id", null: false
-    t.bigint "placement_id", null: false
-    t.integer "worker_rating"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_ratings_on_client_id"
-    t.index ["placement_id"], name: "index_ratings_on_placement_id"
-    t.index ["worker_id"], name: "index_ratings_on_worker_id"
   end
 
   create_table "workers", force: :cascade do |t|
@@ -162,7 +151,4 @@ ActiveRecord::Schema.define(version: 2022_10_03_192327) do
   add_foreign_key "placements", "clients"
   add_foreign_key "placements", "job_requests"
   add_foreign_key "placements", "workers"
-  add_foreign_key "ratings", "clients"
-  add_foreign_key "ratings", "placements"
-  add_foreign_key "ratings", "workers"
 end

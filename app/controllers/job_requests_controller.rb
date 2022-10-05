@@ -78,7 +78,7 @@ class JobRequestsController < ApplicationController
         end
 
         def jobrequest_params
-            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, filled_vacancies, skills:[],skills_necessary: [])
+            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, filled_vacancies, :category, skills:[],skills_necessary: [])
         end
 
         def skills

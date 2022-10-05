@@ -11,6 +11,7 @@ class JobRequest < ApplicationRecord
     validates :monthly_salary, presence: true
     validate :necessary_skills_unique
     validate :start_date_in_the_past
+    validates :category, presence:true
 
     def applied?(worker)
         workers.include?(worker)
@@ -39,6 +40,21 @@ class JobRequest < ApplicationRecord
     end
     final_counter= ((counter/skills_job.count)*100).round(2)
     end
+
+    def fill_rate(job)
+        filled = job.filled_vacancies
+        total = job.filled_vacancies + job.vacancies_count
+        fill_date = (filled.to_f/total.to_f)*100
+    end
+
+    def business_importance(client)
+        total = 0
+        client.job_requests.each do |job|
+            total += ((job.filled_vacancies + job.vacancies_count)*job.monthly_salary)
+        end
+        return total
+    end
+
 
 
 

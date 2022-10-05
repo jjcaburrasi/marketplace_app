@@ -6,8 +6,8 @@ task :check_jobs => :environment do
   @placements = Placement.all
   @placements.each do |placement|
     if placement.end_date == Date.today
-        placement.worker.working = false
-        placement.worker.available = true
+        placement.worker.update(working: false)
+        placement.worker.update(available:true)
     end
   end
 

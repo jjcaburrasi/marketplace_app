@@ -10,6 +10,11 @@
                 <%= f.text_field :job_function%>
             </div>
             <div class='field'>
+            <%= f.label :Category %><br/>
+            <%= f.select :category, ['Logistics', 'Tech', 'Driving', 'Distribution', 'Sales', 'Other']%>
+            </div>
+                 
+            <div class='field'>
                 <%= f.label :address %><br/>
                 <%= f.text_field :address%>
             </div>
