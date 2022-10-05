@@ -55,6 +55,9 @@ class JobRequest < ApplicationRecord
         return total
     end
 
+    def active_placements(job)
+        @active_placements=Placement.where(job_request: job).where("end_date > ?", Date.today)  
+    end
 
 
 

@@ -45,16 +45,25 @@ class JobRequestsController < ApplicationController
         @job = JobRequest.find(params[:id])
         search_skills_necesary = params[:job_request][:skills_necessary]
         search_skills = params[:job_request][:skills]
-        if search_skills_necesary.intersection(search_skills).any?
-           flash[:danger] = "A skill can't be necessary and desired at same time"
-           redirect_to request.referer
-        
-        elsif @job.update(jobrequest_params)
-            flash[:success] = "Job updated"
-            redirect_to @job
-        else
-            render 'edit'
-        end         
+
+        if !@job.active_placements(@job).any?
+            if search_skills_necesary.intersection(search_skills).any?
+            flash[:danger] = "A skill can't be necessary and desired at same time"
+            redirect_to request.referer
+            elsif @job.update(jobrequest_params)
+                flash[:success] = "Job updated"
+                redirect_to @job
+            else
+                render 'edit'
+            end 
+        else       
+            flash[:info]="Currently there is an active placement for this job, a new job request with the new conditios has been created"
+            job= JobRequest.new(jobrequest_params)
+            job.update(client: current_client)
+            job.save
+            redirect_to request.referer
+
+        end
     end
 
     def destroy
