@@ -9,7 +9,7 @@ job_desirable_skills= ["Work rotatory turn", "English",
     "Spanish", "Capacity to load heavy weights", "Disability certificate"]
 all_skills= ["Work rotatory turn", "English",
     "Spanish", "Capacity to load heavy weights", "Disability certificate",'Driving License', 'Tech', 'Construction', "Own motorcycle" ]
-
+categories= ['Logistics', 'Tech', 'Driving', 'Distribution', 'Sales', 'Other']
 
 Worker.create!(name:"John Doe", 
                 email: "w@w.com", password:"123456", skills: ["Driving License"])
@@ -20,12 +20,14 @@ client= Client.create!(name:"Amazon",
 #Generate a pair of JobRequest to example client
 
 4.times {
+    category = categories.shuffle[1]
+   
     rnd_number_skills = rand(1..5)
     rnd_necessary_number_skills = rand(1..2)
     rnd_skills = job_desirable_skills.shuffle[1..rnd_number_skills]
     rnd_necessary_skills= job_necessary_skills.shuffle[1..rnd_necessary_number_skills]
 job = JobRequest.new(client: client, job_function:Faker::Job.title, 
-    address: Faker::Address.city, monthly_salary: 1000, skills: rnd_skills, skills_necessary: rnd_necessary_skills,
+    address: Faker::Address.city, monthly_salary: 1000, category: category, skills: rnd_skills, skills_necessary: rnd_necessary_skills,
     start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
     job.save(validate: false)
 }
@@ -61,12 +63,13 @@ end
     rnd_monthly_salary= rand(900..1500)
 
     5.times do
+        category = categories.shuffle[1]
         rnd_number_skills = rand(1..5)
         rnd_necessary_number_skills = rand(1..2)
         rnd_skills = job_desirable_skills.shuffle[1..rnd_number_skills]
         rnd_necessary_skills= job_necessary_skills.shuffle[1..rnd_necessary_number_skills]
         job=JobRequest.new(client: client, job_function:Faker::Job.title, 
-            address: Faker::Address.city, monthly_salary: rnd_monthly_salary, skills: rnd_skills, 
+            address: Faker::Address.city, monthly_salary: rnd_monthly_salary, category: category, skills: rnd_skills, 
             skills_necessary: rnd_necessary_skills,
             start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
         job.save(validate:false)

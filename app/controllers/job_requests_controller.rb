@@ -43,7 +43,13 @@ class JobRequestsController < ApplicationController
 
     def update
         @job = JobRequest.find(params[:id])
-        if @job.update(jobrequest_params)
+        search_skills_necesary = params[:job_request][:skills_necessary]
+        search_skills = params[:job_request][:skills]
+        if search_skills_necesary.intersection(search_skills).any?
+           flash[:danger] = "A skill can't be necessary and desired at same time"
+           redirect_to request.referer
+        
+        elsif @job.update(jobrequest_params)
             flash[:success] = "Job updated"
             redirect_to @job
         else
@@ -78,7 +84,7 @@ class JobRequestsController < ApplicationController
         end
 
         def jobrequest_params
-            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, filled_vacancies, :category, skills:[],skills_necessary: [])
+            params.require(:job_request).permit(:end_date, :start_date, :job_function, :address, :vacancies_count, :monthly_salary, :filled_vacancies, :category, skills:[],skills_necessary: [])
         end
 
         def skills
