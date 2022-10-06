@@ -97,7 +97,7 @@ end
 
 #Generate placements (4 finished and 4 current)
 #4 finished
-4.times do |n|
+20.times do |n|
 
 
 Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
