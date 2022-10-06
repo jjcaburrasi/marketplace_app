@@ -52,7 +52,7 @@ Admin.create!(email: "a@a.com", password:"123456")
 end
 
 # Generate a bunch of clients.
-10.times do |n|
+20.times do |n|
     name  = Faker::Company.name
     email = "example-#{n+1}@railstutorial.org"
     password = "password"
@@ -100,9 +100,9 @@ end
 4.times do |n|
 
 
-Placement.create!(client_id: 1, worker_id: n+1, 
+Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
                                 candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2022", 
-                                monthly_salary: 1000, created_at: nil, updated_at: nil, 
+                                monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
                                 job_request_id:n+1)
 end
 
@@ -110,9 +110,9 @@ end
 
 4.times do |n|
 
-Placement.create!(client_id: 1, worker_id: n+1, 
+Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
                                 candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2023", 
-                                monthly_salary: 1000, created_at: nil, updated_at: nil, 
+                                monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
                                 job_request_id:n+1)
 
 
