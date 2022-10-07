@@ -1,12 +1,17 @@
 <div class='container'>
     <% if worker_signed_in? %> 
         <h2> Available jobs </h2>
+        <%= will_paginate @jobs%>
     <% elsif admin_signed_in? %>
-    <h2> All jobs </h2>
+        <h2> All jobs </h2>
+        <%= will_paginate @jobs%>
     <% elsif client_signed_in? %>
         <h2> My job requests </h2>
+        <%= will_paginate @jobs%>
     <%else%>
         <h2> Explore available jobs </h2>
+        <%= will_paginate @jobs%>
+
     <%end%>
 
     <% if !@jobs.nil? %>

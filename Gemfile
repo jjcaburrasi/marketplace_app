@@ -26,6 +26,7 @@ gem "letter_opener", group: :development
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '3.4.1'
 gem 'unread'
+gem 'will_paginate', '~> 3.3'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
