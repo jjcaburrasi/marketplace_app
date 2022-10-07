@@ -1,5 +1,5 @@
 class CandidaciesController < ApplicationController
-    # before_action :authorized?, only: [:index]
+    before_action :authorized?, only: [:index]
    
 
     def new
