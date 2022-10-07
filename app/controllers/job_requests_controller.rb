@@ -1,7 +1,7 @@
 class JobRequestsController < ApplicationController
     before_action :authorized?, except: [:index]
     before_action :can_create?, only: [:new, :create]
-    # before_action :can_update?, only: [:edit, :update]
+    before_action :can_update?, only: [:edit, :update]
     before_action :downcase, only: [:search_jobs]
     attr_accessor :filled_vacancies, :vacancies_count
     include ApplicationHelper
