@@ -16,4 +16,10 @@ class PlacementsControllerTest < ActionDispatch::IntegrationTest
     get placements_path
     assert_response :success
   end
+
+  # test "not admin should not see placement index" do
+  #   sign_in @user
+  #   get placements_path
+  #   assert_response :success
+  # end
 end
