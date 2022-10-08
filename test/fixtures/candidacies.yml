@@ -2,6 +2,11 @@
 candidacy1:
   worker: jose
   job_request: job1
+
+candidacy2:
+  worker: mary
+  job_request: job3
+
   
   
 

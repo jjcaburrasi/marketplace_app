@@ -1,3 +1,20 @@
 job1:
-  job_function: job
-  client: client1
+ job_function: job
+ client: client1
+ skills: ['construction']
+ skills_necessary: ['english','spanish']
+ start_date: 2022-10-9
+ end_date: 2022-11-9
+ monthly_salary: 1000
+ category: tech
+ vacancies_count: 3
+
+job2:
+ job_function: engineer
+ client: client2
+
+job3:
+ job_function: constructor
+ client: client3
+ skills: ['construction']
+ skills_necessary: ['english','spanish']

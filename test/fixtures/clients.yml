@@ -7,3 +7,8 @@ client2:
   name: Client2
   address: 'address2'
   email: jjc2@example.com
+
+client3:
+  name: Client3
+  address: 'addres2'
+  email: jj2@example.com

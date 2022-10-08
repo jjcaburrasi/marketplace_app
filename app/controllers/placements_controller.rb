@@ -32,7 +32,7 @@ class PlacementsController < ApplicationController
     end
 
     def authorized?
-        return unless current_worker
+        return unless !(current_admin || current_client)
         redirect_to root_path, alert: 'Page not found'
     end
 
