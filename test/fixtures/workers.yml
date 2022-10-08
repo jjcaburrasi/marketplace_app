@@ -3,5 +3,9 @@ jose:
   email: jjc@example.com
 
 sol:
-  name: Sol Bucker
+  name: Sol Buker
   email: sol@example.com
+
+mary:
+  name: Mary
+  email: mary@example.com
