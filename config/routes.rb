@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :placements
   get  '/search_workers', to: 'workers#search_workers'
   get  '/search_jobs',    to: 'job_requests#search_jobs'
   
@@ -8,10 +9,10 @@ Rails.application.routes.draw do
   devise_for :workers
   resources :job_requests, path:"jobs" do
     resources :candidacies
-    get '/suggestedworkers', to: 'workers#suggested_workers'
+    get 'suggestedworkers', to: 'workers#suggested_workers'
   end
   resources :workers do
-    get  '/inform_worker',   to: 'workers#inform_worker' 
+    get  'inform_worker',   to: 'workers#inform_worker' 
   end
 
   resources :clients do

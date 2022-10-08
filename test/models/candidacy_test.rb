@@ -3,7 +3,7 @@ require "test_helper"
 class CandidacyTest < ActiveSupport::TestCase
   
     def setup
-       @candidacy = Candidacy.new
+       @candidacy = candidacies(:candidacy1)
     end
   
     test "should be valid" do

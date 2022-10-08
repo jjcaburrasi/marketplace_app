@@ -60,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: marketplace_app_development
+  database: marketplace_app_test
   username: marketplace_app
   password: secret
   host: localhost
