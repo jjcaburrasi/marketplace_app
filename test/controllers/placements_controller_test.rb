@@ -31,8 +31,7 @@ class PlacementsControllerTest < ActionDispatch::IntegrationTest
     get placements_path
     assert_redirected_to root_path
     sign_out @user
-
-end
+  end
  
   # test "admin should see placement index" do
   #   sign_in @admin

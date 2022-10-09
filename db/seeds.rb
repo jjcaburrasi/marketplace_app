@@ -73,8 +73,10 @@ end
         job=JobRequest.new(client: client, job_function:Faker::Job.title, 
             address: Faker::Address.city, monthly_salary: rnd_monthly_salary, category: category, skills: rnd_skills, 
             skills_necessary: rnd_necessary_skills,
-            start_date: "20/08/2023", end_date: "31/08/2023", vacancies_count: rand(1..5))
+            start_date: Faker::Date.between(from: '2022-10-13', to: '2022-12-15'), end_date: Faker::Date.between(from: '2022-12-17', to: '2023-03-25'), vacancies_count: rand(1..5))
         job.save(validate:false)
+
+
     end
 end
 
@@ -95,28 +97,54 @@ jobs_selected= []
     
 end
 
+10.times do |n|
+    name  = Faker::Name.name
+    job = Client.find(n+1).job_requests.last
+    email = "example-#{n+60}@railstutorial.org"
+    password = "password"
+    rnd_number_skills = rand(4..9)
+    rnd_skills = all_skills.shuffle[1..rnd_number_skills]
+    worker = Worker.create!(name:  name,
+    email: email,
+    password:              password,
+    skills: rnd_skills
+    )
+    candidacy = Candidacy.create!(job_request: job, worker: worker, start_date: job.start_date, status: "Hired")
+    Placement.create!(worker: worker, client_id: n+1, job_request: job, 
+                        end_date: Client.find(n+1).job_requests.last.end_date,
+                        start_date: Client.find(n+1).job_requests.last.start_date,
+                        candidacy: candidacy)
+    job.update(vacancies_count: job.vacancies_count-1)
+    job.update(filled_vacancies: job.filled_vacancies+1)
+    worker.update(working: true)
+    worker.update(available: false)
+
+    end
+
+
+
 #Generate placements (4 finished and 4 current)
 #4 finished
-20.times do |n|
+# 20.times do |n|
 
 
-Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
-                                candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2022", 
-                                monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
-                                job_request_id:n+1)
-end
+# Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
+#                                 candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2022", 
+#                                 monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
+#                                 job_request_id:n+1)
+# end
 
-#4 current 
+# #4 current 
 
-4.times do |n|
+# 4.times do |n|
 
-Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
-                                candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2023", 
-                                monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
-                                job_request_id:n+1)
+# Placement.create!(client_id: rnd_client= rand(1..20), worker_id: n+1, 
+#                                 candidacy_id: n+1, start_date: "20/08/2022", end_date: "31/08/2023", 
+#                                 monthly_salary: rnd_monthly_salary= rand(900..1500), created_at: nil, updated_at: nil, 
+#                                 job_request_id:n+1)
 
 
-end
+# end
 
 
 
