@@ -1,4 +1,7 @@
 class WorkersController < ApplicationController
+    before_action :authorized_index?, only: [:index]
+    before_action :authorized_show?, only: [:show]
+    before_action :authenticate_client!, only: [:suggested_workers]
     def show
         @worker = Worker.find(params[:id])
     end
@@ -73,5 +76,15 @@ class WorkersController < ApplicationController
             end
         end
         final_counter= ((counter/skills_job.count)*100).round(2)
+    end
+
+    def authorized_index?
+        return unless !(current_client || current_admin)
+        redirect_to root_path
+    end
+
+    def authorized_show?
+        return unless !(current_client || current_admin || current_worker == Worker.find(params[:id]))
+        redirect_to root_path
     end
 end
