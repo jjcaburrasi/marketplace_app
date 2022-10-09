@@ -18,7 +18,7 @@ class UpdateCandidacy < ApplicationService
                         UserMailer.client_full_vacancies(@candidacy, @job.client).deliver_now
                     end
                 
-                Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
+                Placement.create(job_request: @job, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
                 change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
                
             end
