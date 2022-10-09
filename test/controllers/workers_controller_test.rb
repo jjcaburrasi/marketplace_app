@@ -56,6 +56,31 @@ class WorkersControllerTest < ActionDispatch::IntegrationTest
         get job_request_suggestedworkers_path(@job)
         assert_redirected_to new_client_session_path
     end
+
+    test "admins should see workers profile" do
+        sign_in @admin
+        get worker_path(@worker1)
+        assert_response :success
+    end
+
+    test "clients should see workers profile" do
+        sign_in @client
+        get worker_path(@worker1)
+        assert_response :success
+    end
+
+    test "workers should see their own profile" do
+        sign_in @worker1
+        get worker_path(@worker1)
+        assert_response :success
+    end
+
+    test "worker should be able to update their profile" do
+        sign_in @worker1
+        patch worker_path(@worker1), params: { worker: {name: 'name'} }
+        @worker1.reload
+        assert_equal "name", @worker1.name
+    end
  
  
 end
