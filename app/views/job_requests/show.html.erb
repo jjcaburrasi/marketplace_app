@@ -29,7 +29,7 @@
             <p> Vacancies filled: <%=@job.filled_vacancies%></p>
             <p> Applies: <%=@job.candidacies.count%></p><p><%= link_to 'See Applies' , job_request_candidacies_path(@job) %></p>
             <% if @job.filled_vacancies != 0 %> 
-                <p><%= link_to 'Current placements', placements_path(@job)%></p>
+                <p><%= link_to 'Current placements', job_request_placements_path(@job)%></p>
             <%end%>
             <p><%= link_to 'Edit Job Request' , edit_job_request_path(@job) %></p>
             <% if @job.vacancies_count != 0 %>
