@@ -86,12 +86,12 @@ class JobRequestsController < ApplicationController
 
         def can_create?
             return unless !current_client
-            redirect to job_requests_path
+            redirect_to job_requests_path
         end
 
         def can_update?
             return unless current_worker
-            redirect to job_requests_path
+            redirect_to job_requests_path
         end
 
         def jobrequest_params

@@ -1,6 +1,7 @@
 require "test_helper"
 
 class JobRequestTest < ActiveSupport::TestCase
+  include Devise::Test::IntegrationHelpers
 
   def setup
     @user=workers(:jose)

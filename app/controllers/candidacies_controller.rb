@@ -1,5 +1,7 @@
 class CandidaciesController < ApplicationController
     before_action :authorized?, only: [:index]
+    before_action :admin?, only: [:update]
+    before_action :worker?, only: [:create]
    
 
     def new
@@ -55,4 +57,16 @@ class CandidaciesController < ApplicationController
         return unless !someone_signed_in?
         redirect_to root_path, alert: 'Page not found'
     end
+
+    def admin?
+        return unless !current_admin
+        redirect_to root_path, alert: 'Page not found'
+    end
+
+    def worker?
+        return unless !current_worker
+        redirect_to root_path, alert: 'Page not found'
+    end
+
+
 end
