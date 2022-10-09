@@ -113,7 +113,7 @@ end
     Placement.create!(worker: worker, client_id: n+1, job_request: job, 
                         end_date: Client.find(n+1).job_requests.last.end_date,
                         start_date: Client.find(n+1).job_requests.last.start_date,
-                        candidacy: candidacy)
+                        candidacy: candidacy, monthly_salary: job.monthly_salary)
     job.update(vacancies_count: job.vacancies_count-1)
     job.update(filled_vacancies: job.filled_vacancies+1)
     worker.update(working: true)
