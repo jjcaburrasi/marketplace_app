@@ -7,7 +7,7 @@ job1:
  end_date: 2022-11-9
  monthly_salary: 1000
  category: tech
- vacancies_count: 3
+ vacancies_count: 2
 
 job2:
  job_function: engineer
@@ -22,4 +22,4 @@ job3:
  end_date: 2022-11-9
  monthly_salary: 1000
  category: tech
- vacancies_count: 3
+ vacancies_count: 4

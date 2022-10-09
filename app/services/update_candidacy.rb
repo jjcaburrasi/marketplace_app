@@ -20,14 +20,17 @@ class UpdateCandidacy < ApplicationService
                 
                 Placement.create(job_request: @job, client: @job.client, client: @job.client, worker: @candidacy.worker, candidacy: @candidacy, start_date: @job.start_date, end_date: @job.end_date, monthly_salary: @job.monthly_salary)
                 change_status(@candidacy.worker.candidacies.where.not(id: @candidacy.id))
+               
             end
             if @candidacy.status == 'Rejected'
             UserMailer.reject_candidate(@candidacy.worker, @candidacy.job_request).deliver_now
             end
             return true
+ 
         else
             return false
         end
+        
     end
 
     private

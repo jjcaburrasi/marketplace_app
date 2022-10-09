@@ -24,10 +24,8 @@ class WorkersController < ApplicationController
             a2= Set.new(skills_search)
             compare_skills=a2.subset?(a1)
             if compare_skills
-                p "WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
-                p worker
                 @workers << worker
-                p @workers
+            
             end
         end
         @workers

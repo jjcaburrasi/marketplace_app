@@ -4,4 +4,11 @@ placement1:
   job_request: job3
   worker: mary
   candidacy: candidacy2
+  end_date: 01/01/2050
 
+placement2:
+  client: client2
+  job_request: job2
+  worker: jose
+  candidacy: candidacy1
+  end_date: 01/01/2010

@@ -1,11 +1,17 @@
 jose:
   name: Jose Caburrasi
   email: jjc@example.com
+  skills: ["Spanish"]
+  available: true
 
 sol:
   name: Sol Buker
   email: sol@example.com
+  skills: ["English"]
+  available: false
 
 mary:
   name: Mary
   email: mary@example.com
+  skills: ["Spanish"]
+  available: false

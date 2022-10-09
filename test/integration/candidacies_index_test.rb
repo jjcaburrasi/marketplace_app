@@ -13,10 +13,12 @@ class CandidaciesIndexTest < ActionDispatch::IntegrationTest
         get job_request_candidacies_path(@job)      
     end
 
+
     test "should get all worker candidacies when signed in as worker" do
         sign_in @worker
         get candidacies_path
         assert_select 'div.card', count = @worker.candidacies.count
+       
     end
 
 end

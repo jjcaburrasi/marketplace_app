@@ -28,6 +28,11 @@ class WorkersControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to root_path
     end
 
+    test "visitors should not see workers index" do
+        get workers_path
+        assert_redirected_to root_path
+    end
+
     test "admins should see workers index" do
         sign_in @admin
         get workers_path
