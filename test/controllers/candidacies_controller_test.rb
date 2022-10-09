@@ -28,7 +28,7 @@ class CandidaciesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not be able to see candidacies index as visitor' do
-    get candidacies_path
+    get job_request_candidacies_path(@job)
     assert_redirected_to root_path
   end
 

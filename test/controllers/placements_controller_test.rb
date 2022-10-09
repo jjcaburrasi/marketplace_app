@@ -12,11 +12,11 @@ class PlacementsControllerTest < ActionDispatch::IntegrationTest
     @job_client = job_requests(:job1)  
   end
  
-  # test "admin should see placement index" do
-  #   sign_in @admin
-  #   get placements_path
-  #   assert_response :success
-  # end
+  test "admin should see placement index" do
+    sign_in @admin
+    get placements_path
+    assert_response :success
+  end
 
   # test "client should see placement index for specific job" do
   #   sign_in @client

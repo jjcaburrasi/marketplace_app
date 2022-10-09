@@ -1,21 +1,22 @@
 require "test_helper"
 
 class JobRequestsControllerTest < ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
 
   def setup
     @user=workers(:jose)
     @app = candidacies(:candidacy1)
     @job=job_requests(:job1) 
     @client=clients(:client1)  
-    @admin = admins(:admin)        
+    @admin = admins(:admin)   
+    @worker = workers(:jose)     
   end
 
 
   test "should get jobs index" do
-    get job_requests_path
+    get "/jobs"
     assert_response :success
   end
+
 
 
 
