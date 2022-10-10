@@ -27,6 +27,7 @@ gem "letter_opener", group: :development
 gem 'bootstrap-sass', '3.4.1'
 gem 'unread'
 gem 'will_paginate', '~> 3.3'
+gem 'newrelic_rpm'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
