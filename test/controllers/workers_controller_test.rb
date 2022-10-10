@@ -45,11 +45,7 @@ class WorkersControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
     end
 
-    test "workers should not see suggested workers" do
-        sign_in @worker1
-        get job_request_suggestedworkers_path(@job)
-        assert_redirected_to new_client_session_path
-    end
+
 
     test "admins should not see suggested workers" do
         sign_in @admin
